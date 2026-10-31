@@ -17,8 +17,8 @@ e tenta coletar:
 Os dados são salvos em dois arquivos:
 
 - `cursos_senac_sobral.csv`, para abrir e filtrar os dados em uma planilha;
-- `cursos_senac_sobral.md`, com os detalhes organizados em seções Markdown
-  para leitura em editores, repositórios ou visualizadores de Markdown.
+- `cursos_senac_sobral.md`, com os detalhes em callouts compatíveis com o
+  Obsidian, para leitura em editores e visualizadores de Markdown.
 
 Campos que não estiverem disponíveis na página podem ficar vazios no CSV e são
 omitidos do relatório Markdown. O CSV é gravado em UTF-8 com BOM para facilitar

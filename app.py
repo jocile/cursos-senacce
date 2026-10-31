@@ -101,7 +101,9 @@ def salvar_markdown(cursos: list[dict[str, str]]) -> None:
         for campo, rotulo in ROTULOS_MARKDOWN.items():
             valor = curso.get(campo, "").strip()
             if valor:
-                linhas.extend([f"### {rotulo}", "", valor, ""])
+                linhas.append(f"> [!info] {rotulo}")
+                linhas.extend(f"> {linha}" if linha else ">" for linha in valor.splitlines())
+                linhas.append("")
 
     with open(ARQUIVO_MARKDOWN, "w", encoding="utf-8") as arquivo:
         arquivo.write("\n".join(linhas).rstrip() + "\n")
