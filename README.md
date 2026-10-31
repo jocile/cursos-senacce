@@ -2,6 +2,8 @@
 
 Script em Python que usa Selenium para consultar os cursos disponíveis na
 unidade Senac Sobral e exportar informações de cada curso para um arquivo CSV.
+O script `app_psg.py` também consulta as oportunidades de bolsas do Programa
+Senac de Gratuidade (PSG) da mesma unidade.
 
 ## O que é coletado
 
@@ -70,6 +72,27 @@ O Chrome será aberto durante a coleta e fechado ao final. Os arquivos
 `cursos_senac_sobral.csv` e `cursos_senac_sobral.md` serão criados ou
 substituídos na pasta atual. A saída do terminal informa quantos cursos foram
 salvos.
+
+### Oportunidades PSG
+
+Para capturar as oportunidades do PSG disponíveis na unidade Senac Sobral,
+execute:
+
+```powershell
+python app_psg.py
+```
+
+Ou, sem ativar o ambiente virtual:
+
+```powershell
+.\.venv\Scripts\python.exe app_psg.py
+```
+
+Esse script filtra o catálogo PSG por unidade Sobral e visita a página de cada
+oportunidade para coletar detalhes adicionais, como descrição, datas, carga
+horária, vagas, pré-requisitos e prazos. Ele cria ou substitui
+`cursos_senac_sobral_psg.csv` e `cursos_senac_sobral_psg.md`, sem alterar os
+arquivos produzidos por `app.py`.
 
 ## Colunas do CSV
 
