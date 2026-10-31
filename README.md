@@ -88,9 +88,11 @@ Ou, sem ativar o ambiente virtual:
 .\.venv\Scripts\python.exe app_psg.py
 ```
 
-Esse script filtra o catálogo PSG por unidade Sobral e visita a página de cada
-oportunidade para coletar detalhes adicionais, como descrição, datas, carga
-horária, vagas, pré-requisitos e prazos. Ele cria ou substitui
+Esse script seleciona **Senac Sobral** no filtro de unidades do catálogo PSG e
+visita a página de cada oportunidade filtrada para coletar detalhes adicionais,
+como descrição, datas, carga horária, vagas, pré-requisitos e prazos. A
+quantidade de oportunidades pode mudar conforme o catálogo é atualizado. Ele
+cria ou substitui
 `cursos_senac_sobral_psg.csv` e `cursos_senac_sobral_psg.md`, sem alterar os
 arquivos produzidos por `app.py`.
 

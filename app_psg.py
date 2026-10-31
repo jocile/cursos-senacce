@@ -88,7 +88,14 @@ def normalizar_rotulo(rotulo: str) -> str:
     return re.sub(r"\s+", " ", rotulo).strip().rstrip(":").casefold()
 
 
-def listar_cursos_sobral(driver: webdriver.Chrome, wait: WebDriverWait) -> list[dict[str, str]]:
+def unidade_do_cartao(cartao: WebElement) -> str:
+    informacoes = cartao.find_elements(By.CSS_SELECTOR, ".opportunities__info")
+    return " ".join(informacoes[2].text.split()) if len(informacoes) >= 3 else ""
+
+
+def listar_cursos_sobral(
+    driver: webdriver.Chrome, wait: WebDriverWait
+) -> list[dict[str, str]]:
     driver.get(URL)
     wait.until(
         EC.presence_of_all_elements_located(
@@ -96,17 +103,52 @@ def listar_cursos_sobral(driver: webdriver.Chrome, wait: WebDriverWait) -> list[
         )
     )
 
+    driver.find_element(By.ID, "dropdownMenuLink").click()
+    wait.until(
+        EC.visibility_of_element_located(
+            (By.CSS_SELECTOR, ".dropdown-menu .filter__checkbox_unity")
+        )
+    )
+    opcao_sobral = next(
+        (
+            item
+            for item in driver.find_elements(
+                By.CSS_SELECTOR, ".dropdown-menu .filter__item"
+            )
+            if " ".join(item.text.split()).casefold() == "senac sobral"
+        ),
+        None,
+    )
+    if opcao_sobral is None:
+        raise RuntimeError("A opção Senac Sobral não foi encontrada no filtro.")
+
+    checkbox_sobral = opcao_sobral.find_element(
+        By.CSS_SELECTOR, ".filter__checkbox_unity"
+    )
+    if not checkbox_sobral.is_selected():
+        checkbox_sobral.click()
+
+    wait.until(
+        lambda navegador: (
+            (
+                cartoes := navegador.find_elements(
+                    By.CSS_SELECTOR, ".opportunities__box"
+                )
+            )
+            and all(
+                "sobral" in unidade_do_cartao(cartao).casefold()
+                for cartao in cartoes
+            )
+        )
+    )
+
     cursos = []
     for cartao in driver.find_elements(By.CSS_SELECTOR, ".opportunities__box"):
-        unidade = ""
         informacoes = [
             " ".join(item.text.split())
             for item in cartao.find_elements(By.CSS_SELECTOR, ".opportunities__info")
         ]
-        if len(informacoes) >= 3:
-            unidade = informacoes[2]
-        if "sobral" not in unidade.casefold():
-            continue
+        unidade = unidade_do_cartao(cartao)
 
         titulo = texto(cartao, "h5")
         links = cartao.find_elements(By.CSS_SELECTOR, 'a[href*="/oportunidade/"]')
