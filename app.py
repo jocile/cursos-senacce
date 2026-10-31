@@ -12,6 +12,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 
 URL = "https://cursos.ce.senac.br/unidade/senac-sobral/"
 ARQUIVO_CSV = "cursos_senac_sobral.csv"
+ARQUIVO_MARKDOWN = "cursos_senac_sobral.md"
 ABAS_DETALHES = {
     "requisitos": "requisitos",
     "periodo": "periodo",
@@ -19,6 +20,19 @@ ABAS_DETALHES = {
     "conteúdo": "conteudo",
     "formas de pagamento": "formas_pagamento",
     "mais informações": "mais_informacoes",
+}
+ROTULOS_MARKDOWN = {
+    "descricao": "Descrição",
+    "preco": "Preço",
+    "data": "Data",
+    "horário": "Horário",
+    "carga_horária": "Carga horária",
+    "unidade": "Unidade",
+    "requisitos": "Requisitos",
+    "periodo": "Período",
+    "conteudo": "Conteúdo programático",
+    "formas_pagamento": "Formas de pagamento",
+    "mais_informacoes": "Mais informações",
 }
 
 
@@ -65,6 +79,32 @@ def capturar_detalhes(
         detalhes[chave] = paineis[indice].text.strip()
 
     return detalhes
+
+
+def salvar_markdown(cursos: list[dict[str, str]]) -> None:
+    linhas = [
+        "# Cursos do Senac Sobral",
+        "",
+        f"Catálogo consultado em [Senac Ceará]({URL}).",
+        "",
+    ]
+
+    for curso in cursos:
+        linhas.extend(
+            [
+                f"## {curso['curso']}",
+                "",
+                f"[Abrir página do curso]({curso['url']})",
+                "",
+            ]
+        )
+        for campo, rotulo in ROTULOS_MARKDOWN.items():
+            valor = curso.get(campo, "").strip()
+            if valor:
+                linhas.extend([f"### {rotulo}", "", valor, ""])
+
+    with open(ARQUIVO_MARKDOWN, "w", encoding="utf-8") as arquivo:
+        arquivo.write("\n".join(linhas).rstrip() + "\n")
 
 
 def main() -> None:
@@ -117,7 +157,10 @@ def main() -> None:
             escritor.writeheader()
             escritor.writerows(cursos)
 
-        print(f"{len(cursos_por_url)} cursos salvos em {ARQUIVO_CSV}")
+        salvar_markdown(cursos)
+        print(
+            f"{len(cursos)} cursos salvos em {ARQUIVO_CSV} e {ARQUIVO_MARKDOWN}"
+        )
     finally:
         driver.quit()
 

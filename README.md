@@ -14,9 +14,15 @@ e tenta coletar:
 - requisitos, período, conteúdo programático, formas de pagamento e outras
   informações exibidas nas abas de detalhes.
 
-Os dados são salvos em `cursos_senac_sobral.csv`. Campos que não estiverem
-disponíveis na página podem ficar vazios. O CSV é gravado em UTF-8 com BOM para
-facilitar a abertura em planilhas, como o Microsoft Excel.
+Os dados são salvos em dois arquivos:
+
+- `cursos_senac_sobral.csv`, para abrir e filtrar os dados em uma planilha;
+- `cursos_senac_sobral.md`, com os detalhes organizados em seções Markdown
+  para leitura em editores, repositórios ou visualizadores de Markdown.
+
+Campos que não estiverem disponíveis na página podem ficar vazios no CSV e são
+omitidos do relatório Markdown. O CSV é gravado em UTF-8 com BOM para facilitar
+a abertura em planilhas, como o Microsoft Excel.
 
 ## Requisitos
 
@@ -60,9 +66,10 @@ Ou, sem ativá-lo:
 .\.venv\Scripts\python.exe app.py
 ```
 
-O Chrome será aberto durante a coleta e fechado ao final. O arquivo
-`cursos_senac_sobral.csv` será criado ou substituído na pasta atual. A saída do
-terminal informa quantos cursos foram salvos.
+O Chrome será aberto durante a coleta e fechado ao final. Os arquivos
+`cursos_senac_sobral.csv` e `cursos_senac_sobral.md` serão criados ou
+substituídos na pasta atual. A saída do terminal informa quantos cursos foram
+salvos.
 
 ## Colunas do CSV
 
