@@ -2,6 +2,8 @@
 
 import csv
 import logging
+import re
+from datetime import datetime
 
 from selenium import webdriver
 from selenium.common.exceptions import (
@@ -38,6 +40,17 @@ CAMPOS = [
     "conteudo",
     "formas_pagamento",
     "mais_informacoes",
+    # Fase 2 - colunas derivadas (as originais acima permanecem intactas).
+    "preco_de",
+    "preco_por",
+    "parcelas",
+    "valor_parcela",
+    "data_inicio",
+    "data_fim",
+    "dias_semana",
+    "idade_minima",
+    "escolaridade",
+    "coletado_em",
 ]
 
 ABAS_DETALHES = {
@@ -68,6 +81,94 @@ ERROS_TOLERADOS = (TimeoutException, StaleElementReferenceException)
 logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
 log = logging.getLogger(__name__)
 
+# 2.1 - Linhas de traços usadas pelo site como divisor dentro de uma mesma aba.
+SEPARADOR = re.compile(r"\s*[—―]{3,}\s*")
+CAMPOS_COM_SEPARADOR = {"conteudo", "formas_pagamento"}
+
+VALOR = r"R\$\s*(\d{1,3}(?:\.\d{3})*,\d{2})"
+DATA = r"(\d{2}/\d{2}/\d{2,4})"
+
+
+def limpar_separadores(valor: str) -> str:
+    """2.1 - Troca '———' por quebra de linha."""
+    return SEPARADOR.sub("\n", valor).strip()
+
+
+def limpar_preco(preco: str) -> str:
+    """2.3 - Remove o rótulo 'MATRICULE-SE' que vem misturado ao preço."""
+    linhas = (linha.strip() for linha in preco.splitlines())
+    return "\n".join(l for l in linhas if l and l.upper() != "MATRICULE-SE")
+
+
+def _decimal(correspondencia: re.Match | None) -> str:
+    """'2.367,00' -> '2367.00'; vazio se não houve correspondência."""
+    if not correspondencia:
+        return ""
+    return correspondencia.group(1).replace(".", "").replace(",", ".")
+
+
+def _data_iso(texto: str) -> str:
+    formato = "%d/%m/%Y" if len(texto) == 10 else "%d/%m/%y"
+    try:
+        return datetime.strptime(texto, formato).strftime("%Y-%m-%d")
+    except ValueError:
+        return ""
+
+
+def parsear_preco(preco: str) -> dict[str, str]:
+    """2.3 - Extrai preco_de, preco_por, parcelas e valor_parcela."""
+    de = re.search(rf"De:\s*{VALOR}", preco)
+    por = re.search(rf"Por:\s*{VALOR}", preco)
+    parcelas = re.search(rf"(\d+)\s*x\s*de\s*{VALOR}", preco, re.IGNORECASE)
+
+    if not por and not de:
+        # Sem desconto: o preço único é o primeiro valor antes das parcelas.
+        antes_das_parcelas = preco[: parcelas.start()] if parcelas else preco
+        por = re.search(VALOR, antes_das_parcelas)
+
+    return {
+        "preco_de": _decimal(de),
+        "preco_por": _decimal(por),
+        "parcelas": parcelas.group(1) if parcelas else "",
+        "valor_parcela": (
+            parcelas.group(2).replace(".", "").replace(",", ".") if parcelas else ""
+        ),
+    }
+
+
+def parsear_periodo(periodo: str) -> dict[str, str]:
+    """2.4 - '10/11/26 a 03/12/26 – TER QUI' -> datas ISO e dias da semana."""
+    achado = re.search(rf"{DATA}\s*a\s*{DATA}(?:\s*[–—-]\s*(.*))?", periodo)
+    if not achado:
+        return {"data_inicio": "", "data_fim": "", "dias_semana": ""}
+    return {
+        "data_inicio": _data_iso(achado.group(1)),
+        "data_fim": _data_iso(achado.group(2)),
+        "dias_semana": (achado.group(3) or "").strip(),
+    }
+
+
+def parsear_requisitos(requisitos: str) -> dict[str, str]:
+    """2.4 - Extrai idade mínima e escolaridade do texto de requisitos."""
+    idade = re.search(r"Idade mínima:\s*(\d+)", requisitos)
+    escolaridade = re.search(
+        r"Idade mínima:\s*\d+\s*anos?\s*(?:,|e)\s*(.+?)"
+        r"(?:\s+e\s+Requisito/Conhecimento Específico:.*)?\.?\s*$",
+        requisitos,
+        re.DOTALL,
+    )
+    return {
+        "idade_minima": idade.group(1) if idade else "",
+        "escolaridade": escolaridade.group(1).strip() if escolaridade else "",
+    }
+
+
+def enriquecer(detalhes: dict[str, str]) -> None:
+    """Acrescenta as colunas derivadas; as originais não são alteradas."""
+    detalhes.update(parsear_preco(detalhes.get("preco", "")))
+    detalhes.update(parsear_periodo(detalhes.get("periodo", "")))
+    detalhes.update(parsear_requisitos(detalhes.get("requisitos", "")))
+
 
 def texto_do_primeiro_elemento(
     driver: webdriver.Chrome | WebElement, seletor: str
@@ -94,7 +195,7 @@ def capturar_detalhes(
         "curso": titulo,
         "url": url,
         "descricao": texto_do_primeiro_elemento(driver, ".content__description"),
-        "preco": texto_do_primeiro_elemento(driver, ".item-prices"),
+        "preco": limpar_preco(texto_do_primeiro_elemento(driver, ".item-prices")),
     }
 
     for item in driver.find_elements(By.CSS_SELECTOR, ".bar-item-content"):
@@ -117,8 +218,12 @@ def capturar_detalhes(
 
         chave = ABAS_DETALHES.get(nome.casefold(), nome.casefold().replace(" ", "_"))
         paineis = driver.find_elements(By.CSS_SELECTOR, SELETOR_PAINEIS)
-        detalhes[chave] = paineis[indice].text.strip()
+        valor = paineis[indice].text.strip()
+        if chave in CAMPOS_COM_SEPARADOR:
+            valor = limpar_separadores(valor)
+        detalhes[chave] = valor
 
+    enriquecer(detalhes)
     return detalhes
 
 
@@ -136,11 +241,13 @@ def salvar_csv(cursos: list[dict[str, str]]) -> None:
         escritor.writerows(cursos)
 
 
-def salvar_markdown(cursos: list[dict[str, str]]) -> None:
+def salvar_markdown(cursos: list[dict[str, str]], coletado_em: str) -> None:
     linhas = [
         "# Cursos do Senac Sobral",
         "",
         f"Catálogo consultado em [Senac Ceará]({URL}).",
+        "",
+        f"**Coletado em:** {coletado_em}",
         "",
     ]
 
@@ -195,6 +302,7 @@ def main() -> None:
         wait = WebDriverWait(driver, 20)
         cursos_por_url = listar_cursos(driver, wait)
 
+        coletado_em = datetime.now().strftime("%Y-%m-%d %H:%M")
         cursos: list[dict[str, str]] = []
         falhas: list[tuple[str, str]] = []
         total = len(cursos_por_url)
@@ -203,7 +311,9 @@ def main() -> None:
         for posicao, (url, titulo) in enumerate(cursos_por_url.items(), start=1):
             log.info("[%d/%d] Coletando: %s", posicao, total, titulo)
             try:
-                cursos.append(capturar_detalhes(driver, wait, url, titulo))
+                curso = capturar_detalhes(driver, wait, url, titulo)
+                curso["coletado_em"] = coletado_em
+                cursos.append(curso)
             except ERROS_TOLERADOS as erro:
                 log.warning("Falha em %s (%s): %s", titulo, url, type(erro).__name__)
                 falhas.append((titulo, url))
@@ -212,7 +322,7 @@ def main() -> None:
             raise RuntimeError("Nenhum curso foi coletado com sucesso.")
 
         salvar_csv(cursos)
-        salvar_markdown(cursos)
+        salvar_markdown(cursos, coletado_em)
         print(f"{len(cursos)} cursos salvos em {ARQUIVO_CSV} e {ARQUIVO_MARKDOWN}")
 
         if falhas:

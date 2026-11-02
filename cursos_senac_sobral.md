@@ -2,6 +2,8 @@
 
 Catálogo consultado em [Senac Ceará](https://cursos.ce.senac.br/unidade/senac-sobral/).
 
+**Coletado em:** 2026-11-02 18:12
+
 ## POWER BI EXPERT - 2026.12.397
 
 [Abrir página do curso](https://cursos.ce.senac.br/produto/power-bi-expert-2026-12-397/)
@@ -34,10 +36,23 @@ Catálogo consultado em [Senac Ceará](https://cursos.ce.senac.br/unidade/senac-
 > 10/11/26 a 03/12/26 – TER QUI
 
 > [!info] Conteúdo programático
-> Avanços na Modelagem de Dados e Business Intelligence ———————————————————————————————————————————————————— Classificação e Filtros Avançados ———————————————————————————————————————————————————— DAX Avançado e Cálculos Complexos———————————————————————————————————————————————————— Desenvolvimento de Relatórios Detalhados———————————————————————————————————————————————————— Interação Avançada entre Visuais ———————————————————————————————————————————————————— Otimização de Modelos———————————————————————————————————————————————————— Páginas Dinâmicas e Segmentações de Dados Avançadas———————————————————————————————————————————————————— Personalização de Relatórios———————————————————————————————————————————————————— Power Query Avançado e Manipulação de Dados ———————————————————————————————————————————————————— Automatização de Consultas———————————————————————————————————————————————————— Relatórios Avançados e Visualizações Personalizadas———————————————————————————————————————————————————— Revisão dos Conceitos de Modelagem
+> Avanços na Modelagem de Dados e Business Intelligence
+> Classificação e Filtros Avançados
+> DAX Avançado e Cálculos Complexos
+> Desenvolvimento de Relatórios Detalhados
+> Interação Avançada entre Visuais
+> Otimização de Modelos
+> Páginas Dinâmicas e Segmentações de Dados Avançadas
+> Personalização de Relatórios
+> Power Query Avançado e Manipulação de Dados
+> Automatização de Consultas
+> Relatórios Avançados e Visualizações Personalizadas
+> Revisão dos Conceitos de Modelagem
 
 > [!info] Formas de pagamento
-> Cartão de Débito em até 1x de R$ 280,00 ———————————————————————————————————————————————————— Cartão de Crédito em até 7x de R$ 40,00 ———————————————————————————————————————————————————— Depósito Bancário em até 1x de R$ 280,00 (Para essa forma de pagamento entrar em contato pelo número (85) 3270- 5400 ou WhatsApp (85) 991913667.)
+> Cartão de Débito em até 1x de R$ 280,00
+> Cartão de Crédito em até 7x de R$ 40,00
+> Depósito Bancário em até 1x de R$ 280,00 (Para essa forma de pagamento entrar em contato pelo número (85) 3270- 5400 ou WhatsApp (85) 991913667.)
 
 > [!info] Mais informações
 > Informamos que este curso só ocorrerá se for atingido o número mínimo de alunos por turma. Caso precise de maiores informações, ligue para (85) 3270 5400 ou envie mensagem para o WhatsApp (85) 99191 3667.
@@ -77,7 +92,9 @@ Catálogo consultado em [Senac Ceará](https://cursos.ce.senac.br/unidade/senac-
 > Conteúdos abordam fundamentos da alfaiataria feminina, incluindo história, materiais, ferramentas, geometria, medidas e operações matemáticas aplicadas à modelagem.Incluem técnicas de modelagem tridimensional e plana, tomada de medidas, desenvolvimento de moldes, costura, montagem e acabamentos de peças do vestuário.Também desenvolvem competências profissionais como comunicação, trabalho em equipe, organização, proatividade, responsabilidade, postura profissional e respeito à diversidade.
 
 > [!info] Formas de pagamento
-> Cartão de Débito em até 1x de R$ 575,00 ——————————————————————————————————————————— Cartão de Crédito em até 12x de R$ 47,92 ——————————————————————————————————————————— Depósito Bancário em até 1x de R$ 575,00 (Para essa forma de pagamento entrar em contato pelo número (85) 3270 5400 ou WhatsApp (85) 9 9191 3667.)
+> Cartão de Débito em até 1x de R$ 575,00
+> Cartão de Crédito em até 12x de R$ 47,92
+> Depósito Bancário em até 1x de R$ 575,00 (Para essa forma de pagamento entrar em contato pelo número (85) 3270 5400 ou WhatsApp (85) 9 9191 3667.)
 
 > [!info] Mais informações
 > Informamos que este curso só ocorrerá se for atingido o número mínimo de alunos por turma. Caso precise de maiores informações, ligue para (85) 3270 5400 ou envie mensagem para o WhatsApp (85) 9 9191 3667.
@@ -94,7 +111,6 @@ Catálogo consultado em [Senac Ceará](https://cursos.ce.senac.br/unidade/senac-
 > Por: R$1.656,90
 > Até 12x de
 > R$138,08
-> MATRICULE-SE
 
 > [!info] Data
 > 09/11/2026
@@ -118,7 +134,9 @@ Catálogo consultado em [Senac Ceará](https://cursos.ce.senac.br/unidade/senac-
 > Bases de corte, reta, arredondada, inclinação em V e inclinação inversa. Bases em camadas. Criatividade na realização de cortes de cabelos. Cuidado no manuseio dos cabelos e couro cabeludo. Cumprimento das normas de saúde e segurança. Divisões e subdivisões para corte dos cabelos. Estrutura anatômica da cabeça, face externa do crânio e esqueleto da face. Estrutura e características do cabelo para a realização do corte. Geometria do corte, formas, linhas de direção, simetria, ângulos e eixo. Manter a limpeza e a organização do local de trabalho. Manusear instrumentos, equipamentos e materiais do cabeleireiro. Materiais, instrumentos, equipamentos e produtos para corte de cabelo, característica, validade, função, quantidade, qualidade e formas de descarte. Organizar materiais, produtos, instrumentos e equipamentos. Padrão de crescimento dos fios. Parcimônia na utilização de recursos. Preparar os cabelos para o corte. Visagismo aplicado a cortes de cabelos, estrutura da cabeça, geometria do rosto, cor de pele, formato dos olhos, boca, nariz e sobrancelhas.
 
 > [!info] Formas de pagamento
-> Cartão de Débito em até 1x de R$ 2.367,00 ——————————————————————————————————————————— Cartão de Crédito em até 12x de R$ 197,25 ——————————————————————————————————————————— Depósito Bancário em até 1x de R$ 2.367,00 (Para essa forma de pagamento entrar em contato pelo número (85) 3270- 5400 ou WhatsApp (85) 991913667.)
+> Cartão de Débito em até 1x de R$ 2.367,00
+> Cartão de Crédito em até 12x de R$ 197,25
+> Depósito Bancário em até 1x de R$ 2.367,00 (Para essa forma de pagamento entrar em contato pelo número (85) 3270- 5400 ou WhatsApp (85) 991913667.)
 
 > [!info] Mais informações
 > Informamos que este curso só ocorrerá se for atingido o número mínimo de alunos por turma. Caso precise de maiores informações, ligue para (85) 3270 5400 ou envie mensagem para o WhatsApp (85) 99191 3667.
@@ -132,7 +150,6 @@ Catálogo consultado em [Senac Ceará](https://cursos.ce.senac.br/unidade/senac-
 > Por: R$267,40
 > Até 6x de
 > R$44,57
-> MATRICULE-SE
 
 > [!info] Data
 > 06/11/2026
@@ -153,10 +170,19 @@ Catálogo consultado em [Senac Ceará](https://cursos.ce.senac.br/unidade/senac-
 > 06/11/26 a 14/11/26 – SEX SÁB
 
 > [!info] Conteúdo programático
-> Aplicações Práticas: Estudos de caso e exemplos de aplicações reais Discussão sobre oportunidades de mercado Exercícios práticos de voo e manuseio ——————————————————————————————————————————— Captura e Transmissão de Imagens: Tipos de câmeras e sensores em Drones Configuração de câmeras e ajustes de exposição Transmissão de imagens ao vivo ——————————————————————————————————————————— Componentes Básicos dos Drones: Estrutura e design de Drones Motores, hélices e baterias Sistemas de propulsão e controle ——————————————————————————————————————————— Introdução aos Drones: Definição de Drones e sua evolução tecnológica Tipos de Drones e suas aplicações Aspectos legais e regulamentações para operação de Drones ——————————————————————————————————————————— Operação e Manuseio do Drone: Procedimentos pré-voo e pós-voo Checklists de segurança Técnicas de decolagem, voo e aterrissagem ——————————————————————————————————————————— Princípios de Voo: Noções básicas de aerodinâmica Controles de voo e estabilidade Gerenciamento de altitude e velocidade ——————————————————————————————————————————— Segurança e Emergências: Prevenção de acidentes Procedimentos em emergências Normas de segurança para operadores ——————————————————————————————————————————— Sistemas de Navegação e GPS: Funcionamento de sistemas de navegação por satélite Uso de GPS em Drones Planejamento de rotas de voo.
+> Aplicações Práticas: Estudos de caso e exemplos de aplicações reais Discussão sobre oportunidades de mercado Exercícios práticos de voo e manuseio
+> Captura e Transmissão de Imagens: Tipos de câmeras e sensores em Drones Configuração de câmeras e ajustes de exposição Transmissão de imagens ao vivo
+> Componentes Básicos dos Drones: Estrutura e design de Drones Motores, hélices e baterias Sistemas de propulsão e controle
+> Introdução aos Drones: Definição de Drones e sua evolução tecnológica Tipos de Drones e suas aplicações Aspectos legais e regulamentações para operação de Drones
+> Operação e Manuseio do Drone: Procedimentos pré-voo e pós-voo Checklists de segurança Técnicas de decolagem, voo e aterrissagem
+> Princípios de Voo: Noções básicas de aerodinâmica Controles de voo e estabilidade Gerenciamento de altitude e velocidade
+> Segurança e Emergências: Prevenção de acidentes Procedimentos em emergências Normas de segurança para operadores
+> Sistemas de Navegação e GPS: Funcionamento de sistemas de navegação por satélite Uso de GPS em Drones Planejamento de rotas de voo.
 
 > [!info] Formas de pagamento
-> Cartão de Débito em até 1x de R$ 382,00 ——————————————————————————————————————————— Cartão de Crédito em até 9x de R$ 42,44 ——————————————————————————————————————————— Depósito Bancário em até 1x de R$ 382,00 (Para essa forma de pagamento entrar em contato pelo número (85) 3270 5400 ou WhatsApp (85) 9 9191 3667.)
+> Cartão de Débito em até 1x de R$ 382,00
+> Cartão de Crédito em até 9x de R$ 42,44
+> Depósito Bancário em até 1x de R$ 382,00 (Para essa forma de pagamento entrar em contato pelo número (85) 3270 5400 ou WhatsApp (85) 9 9191 3667.)
 
 > [!info] Mais informações
 > Informamos que este curso só ocorrerá se for atingido o número mínimo de alunos por turma. Caso precise de maiores informações, ligue para (85) 3270 5400 ou envie mensagem para o WhatsApp (85) 9 9191 3667.
@@ -173,7 +199,6 @@ Catálogo consultado em [Senac Ceará](https://cursos.ce.senac.br/unidade/senac-
 > Por: R$319,20
 > Até 7x de
 > R$45,60
-> MATRICULE-SE
 
 > [!info] Data
 > 03/11/2026
@@ -194,10 +219,17 @@ Catálogo consultado em [Senac Ceará](https://cursos.ce.senac.br/unidade/senac-
 > 03/11/26 a 03/12/26 – TER QUA QUI
 
 > [!info] Conteúdo programático
-> Motivação e Liderança: Princípios da motivação e recursos motivacionais; Clima organizacional e como a liderança influencia a motivação; Cultura organizacional e seu impacto no ambiente de trabalho ——————————————————————————————————————————— Estilos e Competências de Liderança: Desenvolvimento do tempo e liderança situacional; Gestão participativa e delegação de competências; Criatividade na resolução de problemas e tomada de decisão ——————————————————————————————————————————— Comunicação Eficiente para Líderes: A importância da comunicação escrita e oral; Diferença entre informar e comunicar; A habilidade de ouvir e se fazer entendido ——————————————————————————————————————————— Competência Interpessoal e Gestão de Conflitos: A importância das relações interpessoais na liderança; Administração de conflitos e a prática do feedback; Fatores que impactam o clima organizacional ——————————————————————————————————————————— Gestão de Pessoas e Equipes: Conceito e evolução da gestão de pessoas; O papel do novo gestor no contexto atual ——————————————————————————————————————————— Treinamento e Desenvolvimento de Equipes: Levantamento de necessidades de treinamento (LNT); Diagnóstico, plano de ação, execução e avaliação
+> Motivação e Liderança: Princípios da motivação e recursos motivacionais; Clima organizacional e como a liderança influencia a motivação; Cultura organizacional e seu impacto no ambiente de trabalho
+> Estilos e Competências de Liderança: Desenvolvimento do tempo e liderança situacional; Gestão participativa e delegação de competências; Criatividade na resolução de problemas e tomada de decisão
+> Comunicação Eficiente para Líderes: A importância da comunicação escrita e oral; Diferença entre informar e comunicar; A habilidade de ouvir e se fazer entendido
+> Competência Interpessoal e Gestão de Conflitos: A importância das relações interpessoais na liderança; Administração de conflitos e a prática do feedback; Fatores que impactam o clima organizacional
+> Gestão de Pessoas e Equipes: Conceito e evolução da gestão de pessoas; O papel do novo gestor no contexto atual
+> Treinamento e Desenvolvimento de Equipes: Levantamento de necessidades de treinamento (LNT); Diagnóstico, plano de ação, execução e avaliação
 
 > [!info] Formas de pagamento
-> Cartão de Débito em até 1x de R$ 456,00 ——————————————————————————————————————————— Cartão de Crédito em até 10x de R$ 45,60 ——————————————————————————————————————————— Depósito Bancário em até 1x de R$ 456,00 (Para essa forma de pagamento entrar em contato pelo número (85) 3270 5400 ou WhatsApp (85) 9 9191 3667.)
+> Cartão de Débito em até 1x de R$ 456,00
+> Cartão de Crédito em até 10x de R$ 45,60
+> Depósito Bancário em até 1x de R$ 456,00 (Para essa forma de pagamento entrar em contato pelo número (85) 3270 5400 ou WhatsApp (85) 9 9191 3667.)
 
 > [!info] Mais informações
 > Informamos que este curso só ocorrerá se for atingido o número mínimo de alunos por turma. Caso precise de maiores informações, ligue para (85) 3270 5400 ou envie mensagem para o WhatsApp (85) 9 9191 3667.
@@ -234,10 +266,15 @@ Catálogo consultado em [Senac Ceará](https://cursos.ce.senac.br/unidade/senac-
 > 09/11/26 a 13/11/26 – SEG TER QUA QUI SEX
 
 > [!info] Conteúdo programático
-> Higiene e Segurança: Tipos de perigos (químicos, físicos e biológicos). Boas práticas na manipulação e armazenamento de alimentos. ——————————————————————————————————————————— Equipamentos e Insumos: Uso correto de utensílios e interpretação de fichas técnicas. ——————————————————————————————————————————— Preparo de Salgados: Técnicas de fritura, forno e massas. Recheios, cocção e armazenamento. ——————————————————————————————————————————— Gestão e Qualidade: Formação de preço e controle de custos. Qualidade e segurança alimentar.
+> Higiene e Segurança: Tipos de perigos (químicos, físicos e biológicos). Boas práticas na manipulação e armazenamento de alimentos.
+> Equipamentos e Insumos: Uso correto de utensílios e interpretação de fichas técnicas.
+> Preparo de Salgados: Técnicas de fritura, forno e massas. Recheios, cocção e armazenamento.
+> Gestão e Qualidade: Formação de preço e controle de custos. Qualidade e segurança alimentar.
 
 > [!info] Formas de pagamento
-> Cartão de Débito em até 1x de R$ 243,00 ——————————————————————————————————————————— Cartão de Crédito em até 6x de R$ 40,50 ——————————————————————————————————————————— Depósito Bancário em até 1x de R$ 243,00 (Para essa forma de pagamento entrar em contato pelo número (85) 3270 5400 ou WhatsApp (85) 9 9191 3667.)
+> Cartão de Débito em até 1x de R$ 243,00
+> Cartão de Crédito em até 6x de R$ 40,50
+> Depósito Bancário em até 1x de R$ 243,00 (Para essa forma de pagamento entrar em contato pelo número (85) 3270 5400 ou WhatsApp (85) 9 9191 3667.)
 
 > [!info] Mais informações
 > Informamos que este curso só ocorrerá se for atingido o número mínimo de alunos por turma. Caso precise de maiores informações, ligue para (85) 3270 5400 ou envie mensagem para o WhatsApp 85 9 9191 3667.
