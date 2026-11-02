@@ -3,6 +3,7 @@
 import logging
 import re
 from datetime import datetime
+from pathlib import Path
 
 from selenium import webdriver
 from selenium.common.exceptions import (
@@ -17,14 +18,17 @@ from comum import (
     configurar_log,
     criar_driver,
     ler_abas,
+    ler_argumentos,
+    normalizar_rotulo,
     salvar_csv,
     salvar_markdown,
     texto,
 )
 
 URL = "https://cursos.ce.senac.br/unidade/senac-sobral/"
-ARQUIVO_CSV = "cursos_senac_sobral.csv"
-ARQUIVO_MARKDOWN = "cursos_senac_sobral.md"
+PASTA = Path(__file__).resolve().parent  # arquivos gravados ao lado do script
+ARQUIVO_CSV = PASTA / "cursos_senac_sobral.csv"
+ARQUIVO_MARKDOWN = PASTA / "cursos_senac_sobral.md"
 
 SELETOR_LINKS_CURSOS = 'a.content__title[href*="/produto/"]'
 
@@ -35,8 +39,8 @@ CAMPOS = [
     "descricao",
     "preco",
     "data",
-    "horário",
-    "carga_horária",
+    "horario",
+    "carga_horaria",
     "unidade",
     "requisitos",
     "periodo",
@@ -68,14 +72,32 @@ ROTULOS_MARKDOWN = {
     "descricao": "Descrição",
     "preco": "Preço",
     "data": "Data",
-    "horário": "Horário",
-    "carga_horária": "Carga horária",
+    "horario": "Horário",
+    "carga_horaria": "Carga horária",
     "unidade": "Unidade",
     "requisitos": "Requisitos",
     "periodo": "Período",
     "conteudo": "Conteúdo programático",
     "formas_pagamento": "Formas de pagamento",
     "mais_informacoes": "Mais informações",
+}
+
+# 4.3 - Tipo de callout do Obsidian/Quartz por campo (os demais usam "info").
+TIPOS_CALLOUT = {
+    "descricao": "abstract",
+    "preco": "tip",
+    "requisitos": "note",
+    "conteudo": "example",
+    "formas_pagamento": "tip",
+    "mais_informacoes": "warning",
+}
+
+# 4.4 - Rótulos da barra de dados do site -> colunas sem acento.
+CHAVES_DADOS = {
+    "data": "data",
+    "horário": "horario",
+    "carga horária": "carga_horaria",
+    "unidade": "unidade",
 }
 
 # 1.2 - Erros que justificam pular um curso sem abortar a coleta inteira.
@@ -89,6 +111,12 @@ CAMPOS_COM_SEPARADOR = {"conteudo", "formas_pagamento"}
 
 VALOR = r"R\$\s*(\d{1,3}(?:\.\d{3})*,\d{2})"
 DATA = r"(\d{2}/\d{2}/\d{2,4})"
+
+
+def chave_do_rotulo(rotulo: str) -> str:
+    """Rótulo do site -> nome da coluna; rótulos novos viram snake_case."""
+    normalizado = normalizar_rotulo(rotulo)
+    return CHAVES_DADOS.get(normalizado, normalizado.replace(" ", "_"))
 
 
 def limpar_separadores(valor: str) -> str:
@@ -189,7 +217,7 @@ def capturar_detalhes(
         rotulo = texto(item, ".item-content__label").rstrip(":")
         valor = texto(item, ".item-content__info")
         if rotulo:
-            detalhes[rotulo.lower().replace(" ", "_")] = valor
+            detalhes[chave_do_rotulo(rotulo)] = valor
 
     abas = ler_abas(driver, wait, ABAS_DETALHES, aceitar_desconhecidas=True)
     for chave, valor in abas.items():
@@ -223,8 +251,9 @@ def listar_cursos(driver: webdriver.Chrome, wait: WebDriverWait) -> dict[str, st
 
 
 def main() -> None:
+    args = ler_argumentos(__doc__)
     configurar_log()
-    driver = criar_driver()
+    driver = criar_driver(visivel=args.visivel)
 
     try:
         wait = WebDriverWait(driver, 20)
@@ -263,6 +292,12 @@ def main() -> None:
             rotulo_link="Abrir página do curso",
             registros=cursos,
             rotulos=ROTULOS_MARKDOWN,
+            tipos=TIPOS_CALLOUT,
+            frontmatter={
+                "tags": ["senac", "cursos"],
+                "unidade": "Senac Sobral",
+                "coletado_em": coletado_em,
+            },
         )
         print(f"{len(cursos)} cursos salvos em {ARQUIVO_CSV} e {ARQUIVO_MARKDOWN}")
 

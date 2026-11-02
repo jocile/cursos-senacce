@@ -1,5 +1,8 @@
 """Captura oportunidades de cursos PSG da unidade Senac Sobral."""
 
+from datetime import datetime
+from pathlib import Path
+
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webelement import WebElement
@@ -10,6 +13,7 @@ from comum import (
     configurar_log,
     criar_driver,
     ler_abas,
+    ler_argumentos,
     normalizar_rotulo,
     salvar_csv,
     salvar_markdown,
@@ -17,8 +21,9 @@ from comum import (
 )
 
 URL = "https://psg.ce.senac.br/oportunidades/"
-ARQUIVO_CSV = "cursos_senac_sobral_psg.csv"
-ARQUIVO_MARKDOWN = "cursos_senac_sobral_psg.md"
+PASTA = Path(__file__).resolve().parent  # arquivos gravados ao lado do script
+ARQUIVO_CSV = PASTA / "cursos_senac_sobral_psg.csv"
+ARQUIVO_MARKDOWN = PASTA / "cursos_senac_sobral_psg.md"
 
 CAMPOS = [
     "curso",
@@ -62,6 +67,16 @@ ROTULOS_MARKDOWN = {
     "prazo_inscricao": "Prazo para inscrição",
     "prazo_entrega_documentos": "Prazo para entrega dos documentos",
     "mais_informacoes": "Mais informações",
+}
+
+# Tipo de callout do Obsidian/Quartz por campo (os demais usam "info").
+TIPOS_CALLOUT = {
+    "descricao": "abstract",
+    "pre_requisitos": "note",
+    "escolaridade": "note",
+    "idade_minima": "note",
+    "prazo_inscricao": "warning",
+    "prazo_entrega_documentos": "warning",
 }
 
 CHAVES_ABAS = {
@@ -189,8 +204,9 @@ def capturar_detalhes(
 
 
 def main() -> None:
+    args = ler_argumentos(__doc__)
     configurar_log()
-    driver = criar_driver()
+    driver = criar_driver(visivel=args.visivel)
 
     try:
         wait = WebDriverWait(driver, 20)
@@ -209,6 +225,12 @@ def main() -> None:
             rotulo_link="Abrir oportunidade",
             registros=cursos,
             rotulos=ROTULOS_MARKDOWN,
+            tipos=TIPOS_CALLOUT,
+            frontmatter={
+                "tags": ["senac", "psg"],
+                "unidade": "Senac Sobral",
+                "coletado_em": datetime.now().strftime("%Y-%m-%d %H:%M"),
+            },
         )
         print(
             f"{len(cursos)} oportunidades PSG do Senac Sobral salvas em "

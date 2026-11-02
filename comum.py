@@ -1,8 +1,11 @@
 """Funções compartilhadas pelos scripts de coleta do Senac Ceará."""
 
+import argparse
 import csv
+import json
 import logging
 import re
+from pathlib import Path
 
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
@@ -21,9 +24,23 @@ def configurar_log() -> None:
     logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
 
 
-def criar_driver() -> webdriver.Chrome:
+def ler_argumentos(descricao: str | None = None) -> argparse.Namespace:
+    parser = argparse.ArgumentParser(description=descricao)
+    parser.add_argument(
+        "--visivel",
+        action="store_true",
+        help="abre o Chrome com janela (por padrão roda em modo headless)",
+    )
+    return parser.parse_args()
+
+
+def criar_driver(visivel: bool = False) -> webdriver.Chrome:
+    opcoes = webdriver.ChromeOptions()
+    if not visivel:
+        opcoes.add_argument("--headless=new")
+        opcoes.add_argument("--window-size=1920,1080")
     service = Service(ChromeDriverManager().install())
-    return webdriver.Chrome(service=service)
+    return webdriver.Chrome(service=service, options=opcoes)
 
 
 def texto(elemento: webdriver.Chrome | WebElement, seletor: str) -> str:
@@ -84,7 +101,7 @@ def ler_abas(
 
 
 def salvar_csv(
-    caminho: str, campos: list[str], registros: list[dict[str, str]]
+    caminho: str | Path, campos: list[str], registros: list[dict[str, str]]
 ) -> None:
     """Grava o CSV em UTF-8 com BOM; chaves fora de `campos` são avisadas e ignoradas."""
     extras = {chave for registro in registros for chave in registro} - set(campos)
@@ -99,15 +116,41 @@ def salvar_csv(
         escritor.writerows(registros)
 
 
+def _yaml(valor: str) -> str:
+    """Texto entre aspas duplas (JSON é YAML válido), seguro para ':' e '#'."""
+    return json.dumps(valor, ensure_ascii=False)
+
+
+def _frontmatter(dados: dict[str, str | list[str]]) -> list[str]:
+    linhas = ["---"]
+    for chave, valor in dados.items():
+        if isinstance(valor, list):
+            linhas.append(f"{chave}:")
+            linhas.extend(f"  - {_yaml(item)}" for item in valor)
+        else:
+            linhas.append(f"{chave}: {_yaml(valor)}")
+    linhas.extend(["---", ""])
+    return linhas
+
+
 def salvar_markdown(
-    caminho: str,
+    caminho: str | Path,
     cabecalho: list[str],
     rotulo_link: str,
     registros: list[dict[str, str]],
     rotulos: dict[str, str],
+    *,
+    tipos: dict[str, str] | None = None,
+    frontmatter: dict[str, str | list[str]] | None = None,
 ) -> None:
-    """Gera o relatório com um callout `[!info]` por campo preenchido."""
-    linhas = list(cabecalho)
+    """Gera o relatório com um callout por campo preenchido.
+
+    `tipos` mapeia campo -> tipo do callout (padrão: info); `frontmatter`,
+    se dado, é gravado como bloco YAML no topo do arquivo.
+    """
+    tipos = tipos or {}
+    linhas = _frontmatter(frontmatter) if frontmatter else []
+    linhas.extend(cabecalho)
 
     for registro in registros:
         linhas.extend(
@@ -121,7 +164,7 @@ def salvar_markdown(
         for campo, rotulo in rotulos.items():
             valor = registro.get(campo, "").strip()
             if valor:
-                linhas.append(f"> [!info] {rotulo}")
+                linhas.append(f"> [!{tipos.get(campo, 'info')}] {rotulo}")
                 linhas.extend(
                     f"> {linha}" if linha else ">" for linha in valor.splitlines()
                 )
