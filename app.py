@@ -6,20 +6,20 @@ from datetime import datetime
 from pathlib import Path
 
 from selenium import webdriver
-from selenium.common.exceptions import (
-    StaleElementReferenceException,
-    TimeoutException,
-)
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 
 from comum import (
+    coletar_com_tolerancia,
     configurar_log,
     criar_driver,
+    data_iso,
+    datas_para_iso,
     ler_abas,
     ler_argumentos,
     normalizar_rotulo,
+    relatar_falhas,
     salvar_csv,
     salvar_markdown,
     texto,
@@ -100,8 +100,8 @@ CHAVES_DADOS = {
     "unidade": "unidade",
 }
 
-# 1.2 - Erros que justificam pular um curso sem abortar a coleta inteira.
-ERROS_TOLERADOS = (TimeoutException, StaleElementReferenceException)
+# Campos de data do CSV gravados em ISO (AAAA-MM-DD); o Markdown mantém o texto do site.
+CAMPOS_DATA = ("data",)
 
 log = logging.getLogger(__name__)
 
@@ -137,14 +137,6 @@ def _decimal(correspondencia: re.Match | None) -> str:
     return correspondencia.group(1).replace(".", "").replace(",", ".")
 
 
-def _data_iso(texto: str) -> str:
-    formato = "%d/%m/%Y" if len(texto) == 10 else "%d/%m/%y"
-    try:
-        return datetime.strptime(texto, formato).strftime("%Y-%m-%d")
-    except ValueError:
-        return ""
-
-
 def parsear_preco(preco: str) -> dict[str, str]:
     """2.3 - Extrai preco_de, preco_por, parcelas e valor_parcela."""
     de = re.search(rf"De:\s*{VALOR}", preco)
@@ -172,8 +164,8 @@ def parsear_periodo(periodo: str) -> dict[str, str]:
     if not achado:
         return {"data_inicio": "", "data_fim": "", "dias_semana": ""}
     return {
-        "data_inicio": _data_iso(achado.group(1)),
-        "data_fim": _data_iso(achado.group(2)),
+        "data_inicio": data_iso(achado.group(1)),
+        "data_fim": data_iso(achado.group(2)),
         "dias_semana": (achado.group(3) or "").strip(),
     }
 
@@ -260,25 +252,21 @@ def main() -> None:
         cursos_por_url = listar_cursos(driver, wait)
 
         coletado_em = datetime.now().strftime("%Y-%m-%d %H:%M")
-        cursos: list[dict[str, str]] = []
-        falhas: list[tuple[str, str]] = []
-        total = len(cursos_por_url)
-
-        # 1.2 - Falha em um curso não derruba os demais.
-        for posicao, (url, titulo) in enumerate(cursos_por_url.items(), start=1):
-            log.info("[%d/%d] Coletando: %s", posicao, total, titulo)
-            try:
-                curso = capturar_detalhes(driver, wait, url, titulo)
-                curso["coletado_em"] = coletado_em
-                cursos.append(curso)
-            except ERROS_TOLERADOS as erro:
-                log.warning("Falha em %s (%s): %s", titulo, url, type(erro).__name__)
-                falhas.append((titulo, url))
-
+        cursos, falhas = coletar_com_tolerancia(
+            list(cursos_por_url.items()),
+            coletar=lambda item: capturar_detalhes(driver, wait, item[0], item[1]),
+            descrever=lambda item: (item[1], item[0]),
+        )
         if not cursos:
             raise RuntimeError("Nenhum curso foi coletado com sucesso.")
+        for curso in cursos:
+            curso["coletado_em"] = coletado_em
 
-        salvar_csv(ARQUIVO_CSV, CAMPOS, cursos)
+        salvar_csv(
+            ARQUIVO_CSV,
+            CAMPOS,
+            [datas_para_iso(curso, CAMPOS_DATA) for curso in cursos],
+        )
         salvar_markdown(
             ARQUIVO_MARKDOWN,
             cabecalho=[
@@ -300,11 +288,7 @@ def main() -> None:
             },
         )
         print(f"{len(cursos)} cursos salvos em {ARQUIVO_CSV} e {ARQUIVO_MARKDOWN}")
-
-        if falhas:
-            print(f"Atenção: {len(falhas)} curso(s) não coletado(s):")
-            for titulo, url in falhas:
-                print(f"  - {titulo}: {url}")
+        relatar_falhas(falhas)
     finally:
         driver.quit()
 

@@ -5,14 +5,26 @@ import csv
 import json
 import logging
 import re
+from collections.abc import Callable, Sequence
+from datetime import datetime
 from pathlib import Path
+from typing import TypeVar
 
 from selenium import webdriver
+from selenium.common.exceptions import (
+    StaleElementReferenceException,
+    TimeoutException,
+)
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support.ui import WebDriverWait
 from webdriver_manager.chrome import ChromeDriverManager
+
+T = TypeVar("T")
+
+# Erros que justificam pular um item sem abortar a coleta inteira.
+ERROS_TOLERADOS = (TimeoutException, StaleElementReferenceException)
 
 SELETOR_CABECALHOS = ".tab-header-item"
 SELETOR_PAINEIS = ".tab-content-item"
@@ -51,6 +63,69 @@ def texto(elemento: webdriver.Chrome | WebElement, seletor: str) -> str:
 
 def normalizar_rotulo(rotulo: str) -> str:
     return re.sub(r"\s+", " ", rotulo).strip().rstrip(":").casefold()
+
+
+def data_iso(texto: str) -> str:
+    """'10/11/2026' ou '10/11/26' -> '2026-11-10'; '' se o formato não bater."""
+    formato = "%d/%m/%Y" if len(texto.rsplit("/", 1)[-1]) == 4 else "%d/%m/%y"
+    try:
+        return datetime.strptime(texto, formato).strftime("%Y-%m-%d")
+    except ValueError:
+        return ""
+
+
+def datas_para_iso(registro: dict[str, str], campos: Sequence[str]) -> dict[str, str]:
+    """Cópia do registro com `campos` convertidos para ISO (AAAA-MM-DD).
+
+    Usa a primeira data dd/mm/aaaa encontrada no texto (ex.: 'Até 10/11/2026'
+    ou '09/11/2026 ( 13:00 - 17:00 )'). Se não houver data reconhecível, o campo
+    fica vazio e um aviso é registrado. O registro original não é alterado, de
+    modo que o relatório Markdown continue mostrando o texto do site.
+    """
+    convertido = dict(registro)
+    for campo in campos:
+        valor = registro.get(campo, "")
+        if not valor:
+            continue
+        achado = re.search(r"\d{1,2}/\d{1,2}/(?:\d{4}|\d{2})\b", valor)
+        convertido[campo] = data_iso(achado.group()) if achado else ""
+        if not convertido[campo]:
+            log.warning(
+                "Data não reconhecida em %r (campo %s, %s)",
+                valor,
+                campo,
+                registro.get("curso", "?"),
+            )
+    return convertido
+
+
+def coletar_com_tolerancia(
+    itens: Sequence[T],
+    coletar: Callable[[T], dict[str, str]],
+    descrever: Callable[[T], tuple[str, str]],
+) -> tuple[list[dict[str, str]], list[tuple[str, str]]]:
+    """Coleta cada item; uma falha tolerada não derruba os demais.
+
+    `descrever` devolve (título, url) para o log. Retorna (coletados, falhas).
+    """
+    coletados: list[dict[str, str]] = []
+    falhas: list[tuple[str, str]] = []
+    for posicao, item in enumerate(itens, start=1):
+        titulo, url = descrever(item)
+        log.info("[%d/%d] Coletando: %s", posicao, len(itens), titulo)
+        try:
+            coletados.append(coletar(item))
+        except ERROS_TOLERADOS as erro:
+            log.warning("Falha em %s (%s): %s", titulo, url, type(erro).__name__)
+            falhas.append((titulo, url))
+    return coletados, falhas
+
+
+def relatar_falhas(falhas: list[tuple[str, str]]) -> None:
+    if falhas:
+        print(f"Atenção: {len(falhas)} item(ns) não coletado(s):")
+        for titulo, url in falhas:
+            print(f"  - {titulo}: {url}")
 
 
 def painel_ativo(navegador: webdriver.Chrome, indice: int) -> bool:

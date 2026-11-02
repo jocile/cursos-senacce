@@ -1,30 +1,38 @@
 # Cursos do Senac Sobral
 
-Script em Python que usa Selenium para consultar os cursos disponíveis na
-unidade Senac Sobral e exportar informações de cada curso para um arquivo CSV.
-O script `app_psg.py` também consulta as oportunidades de bolsas do Programa
-Senac de Gratuidade (PSG) da mesma unidade.
+Scripts em Python que usam Selenium para consultar o catálogo do Senac Ceará
+na unidade Senac Sobral e exportar os dados para CSV e Markdown:
+
+- `app.py` coleta os **cursos** da unidade;
+- `app_psg.py` coleta as **oportunidades de bolsas** do Programa Senac de
+  Gratuidade (PSG) da mesma unidade;
+- `comum.py` reúne o código compartilhado pelos dois (driver, leitura das abas,
+  conversão de datas, tolerância a falhas e gravação dos arquivos).
+
+Os três arquivos precisam ficar na mesma pasta.
 
 ## O que é coletado
 
-Para cada curso listado na página da unidade, o script abre a página individual
-e tenta coletar:
+Para cada curso (ou oportunidade) listado, o script abre a página individual e
+coleta nome, endereço, descrição, datas, horário, carga horária, unidade e as
+informações das abas de detalhes (requisitos, período, conteúdo, formas de
+pagamento, prazos, vagas etc.).
 
-- nome e endereço da página do curso;
-- descrição e preço;
-- data, horário, carga horária e unidade;
-- requisitos, período, conteúdo programático, formas de pagamento e outras
-  informações exibidas nas abas de detalhes.
+Arquivos gerados na mesma pasta dos scripts, criados ou substituídos a cada
+execução:
 
-Os dados são salvos em dois arquivos:
+| Script       | CSV                           | Markdown                     |
+| ------------ | ----------------------------- | ---------------------------- |
+| `app.py`     | `cursos_senac_sobral.csv`     | `cursos_senac_sobral.md`     |
+| `app_psg.py` | `cursos_senac_sobral_psg.csv` | `cursos_senac_sobral_psg.md` |
 
-- `cursos_senac_sobral.csv`, para abrir e filtrar os dados em uma planilha;
-- `cursos_senac_sobral.md`, com os detalhes em callouts compatíveis com o
-  Obsidian, para leitura em editores e visualizadores de Markdown.
-
-Campos que não estiverem disponíveis na página podem ficar vazios no CSV e são
-omitidos do relatório Markdown. O CSV é gravado em UTF-8 com BOM para facilitar
-a abertura em planilhas, como o Microsoft Excel.
+- **CSV:** UTF-8 com BOM, para abrir direto no Excel e filtrar em planilhas.
+  Campos indisponíveis ficam vazios.
+- **Markdown:** frontmatter YAML (`tags`, `unidade`, `coletado_em`) e um callout
+  por campo, compatível com Obsidian e Quartz. Os tipos variam conforme o campo
+  (`abstract` para descrição, `tip` para preço, `warning` para prazos e avisos
+  etc.). Campos vazios são omitidos. Os textos e as datas aparecem como
+  publicados no site.
 
 ## Requisitos
 
@@ -42,72 +50,102 @@ py -m venv .venv
 .\.venv\Scripts\Activate.ps1
 ```
 
-Instale as dependências:
+Instale as dependências (`selenium` e `webdriver-manager`):
 
 ```powershell
 python -m pip install -r requirements.txt
 ```
 
-Se o PowerShell bloquear a ativação do ambiente, execute o script diretamente:
+Se o PowerShell bloquear a ativação do ambiente, use o Python do ambiente
+diretamente:
 
 ```powershell
 .\.venv\Scripts\python.exe -m pip install -r requirements.txt
 ```
+
+> O `ipykernel` não faz mais parte do `requirements.txt`. Se você usa
+> notebooks, instale-o à parte.
 
 ## Execução
 
 Com o ambiente virtual ativado:
 
 ```powershell
-python app.py
+python app.py        # cursos
+python app_psg.py    # oportunidades PSG
 ```
 
 Ou, sem ativá-lo:
 
 ```powershell
 .\.venv\Scripts\python.exe app.py
-```
-
-O Chrome será aberto durante a coleta e fechado ao final. Os arquivos
-`cursos_senac_sobral.csv` e `cursos_senac_sobral.md` serão criados ou
-substituídos na pasta atual. A saída do terminal informa quantos cursos foram
-salvos.
-
-### Oportunidades PSG
-
-Para capturar as oportunidades do PSG disponíveis na unidade Senac Sobral,
-execute:
-
-```powershell
-python app_psg.py
-```
-
-Ou, sem ativar o ambiente virtual:
-
-```powershell
 .\.venv\Scripts\python.exe app_psg.py
 ```
 
-Esse script seleciona **Senac Sobral** no filtro de unidades do catálogo PSG e
-visita a página de cada oportunidade filtrada para coletar detalhes adicionais,
-como descrição, datas, carga horária, vagas, pré-requisitos e prazos. A
-quantidade de oportunidades pode mudar conforme o catálogo é atualizado. Ele
-cria ou substitui
-`cursos_senac_sobral_psg.csv` e `cursos_senac_sobral_psg.md`, sem alterar os
-arquivos produzidos por `app.py`.
+Por padrão o Chrome roda em modo **headless** (sem janela). Para acompanhar a
+coleta ou depurar, use a opção `--visivel`:
+
+```powershell
+python app.py --visivel
+```
+
+A saída do terminal mostra o progresso (`[2/6] Coletando: ...`) e, ao final,
+quantos itens foram salvos. Se uma página falhar (por exemplo, por timeout), o
+script registra um aviso, segue para as demais e lista no fim o que não foi
+coletado. Só aborta se nenhum item for coletado.
+
+O `app_psg.py` seleciona **Senac Sobral** no filtro de unidades do catálogo PSG
+e visita a página de cada oportunidade filtrada. A quantidade de oportunidades
+muda conforme o catálogo é atualizado. Os dois scripts são independentes: um
+não altera os arquivos do outro.
 
 ## Colunas do CSV
 
-O arquivo inclui as colunas `curso`, `url`, `descricao`, `preco`, `data`,
-`horário`, `carga_horária`, `unidade`, `requisitos`, `periodo`, `conteudo`,
-`formas_pagamento` e `mais_informacoes`.
+### `cursos_senac_sobral.csv`
+
+| Grupo                | Colunas                                                                                                                                          |
+| -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Identificação        | `curso`, `url`                                                                                                                                   |
+| Texto do site        | `descricao`, `preco`, `data`, `horario`, `carga_horaria`, `unidade`, `requisitos`, `periodo`, `conteudo`, `formas_pagamento`, `mais_informacoes` |
+| Preço estruturado    | `preco_de`, `preco_por`, `parcelas`, `valor_parcela` (números com ponto decimal, ex.: `1656.90`)                                                 |
+| Período e requisitos | `data_inicio`, `data_fim`, `dias_semana`, `idade_minima` (número), `escolaridade`                                                                |
+| Coleta               | `coletado_em` (`AAAA-MM-DD HH:MM`)                                                                                                               |
+
+As colunas estruturadas são extraídas do texto por expressões regulares. Se o
+site mudar o formato, o campo derivado fica vazio e a coluna de texto original
+continua preenchida. Nas colunas `conteudo` e `formas_pagamento`, os divisores
+`———` do site viram quebras de linha.
+
+### `cursos_senac_sobral_psg.csv`
+
+`curso`, `url`, `categoria`, `unidade`, `horario`, `data`, `dias`, `situacao`,
+`descricao`, `data_inicio`, `data_fim`, `carga_horaria`, `quantidade_vagas`,
+`periodicidade`, `pre_requisitos`, `escolaridade`, `idade_minima`,
+`prazo_inscricao`, `prazo_entrega_documentos` e `mais_informacoes`.
+
+### Formato das datas
+
+Nos dois CSVs, as colunas de data usam o formato ISO `AAAA-MM-DD`, que ordena
+corretamente em planilhas e no pandas:
+
+- `app.py`: `data`, `data_inicio`, `data_fim`;
+- `app_psg.py`: `data`, `data_inicio`, `data_fim`, `prazo_inscricao`,
+  `prazo_entrega_documentos`.
+
+Quando o texto do site traz horário junto (`09/11/2026 ( 13:00 - 17:00 )`), o
+CSV guarda só a data, e o horário continua na coluna `horario`. Se um campo de
+data não puder ser reconhecido, ele fica vazio e o script emite um aviso. O
+relatório Markdown mantém sempre o texto original do site.
 
 ## Observações
 
 - A coleta depende da estrutura atual do site do Senac Ceará; mudanças na página
-  podem exigir ajustes nos seletores do script.
-- Os detalhes refletem o conteúdo publicado pelo Senac no momento da execução.
-  Consulte a página oficial do curso para confirmar disponibilidade, valores e
-  condições antes de tomar decisões.
+  podem exigir ajustes nos seletores dos scripts.
+- Os detalhes refletem o conteúdo publicado pelo Senac no momento da execução
+  (veja `coletado_em`). Consulte a página oficial do curso para confirmar
+  disponibilidade, valores e condições antes de tomar decisões.
+- Se a coleta em modo headless trouxer menos dados que o esperado, rode com
+  `--visivel` para comparar.
 - Execute a coleta de forma moderada e respeite os termos de uso e as regras de
   acesso do site.
+  

@@ -3,14 +3,14 @@ tags:
   - "senac"
   - "cursos"
 unidade: "Senac Sobral"
-coletado_em: "2026-11-02 19:05"
+coletado_em: "2026-11-02 19:31"
 ---
 
 # Cursos do Senac Sobral
 
 Catálogo consultado em [Senac Ceará](https://cursos.ce.senac.br/unidade/senac-sobral/).
 
-**Coletado em:** 2026-11-02 19:05
+**Coletado em:** 2026-11-02 19:31
 
 ## POWER BI EXPERT - 2026.12.397
 

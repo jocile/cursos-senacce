@@ -10,11 +10,14 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 
 from comum import (
+    coletar_com_tolerancia,
     configurar_log,
     criar_driver,
+    datas_para_iso,
     ler_abas,
     ler_argumentos,
     normalizar_rotulo,
+    relatar_falhas,
     salvar_csv,
     salvar_markdown,
     texto,
@@ -36,7 +39,7 @@ CAMPOS = [
     "situacao",
     "descricao",
     "data_inicio",
-    "data_final",
+    "data_fim",
     "carga_horaria",
     "quantidade_vagas",
     "periodicidade",
@@ -57,7 +60,7 @@ ROTULOS_MARKDOWN = {
     "situacao": "Inscrições",
     "descricao": "Descrição",
     "data_inicio": "Data de início",
-    "data_final": "Data final",
+    "data_fim": "Data final",
     "carga_horaria": "Carga horária",
     "quantidade_vagas": "Quantidade de vagas ofertadas",
     "periodicidade": "Periodicidade",
@@ -68,6 +71,15 @@ ROTULOS_MARKDOWN = {
     "prazo_entrega_documentos": "Prazo para entrega dos documentos",
     "mais_informacoes": "Mais informações",
 }
+
+# Campos de data do CSV gravados em ISO (AAAA-MM-DD); o Markdown mantém o texto do site.
+CAMPOS_DATA = (
+    "data",
+    "data_inicio",
+    "data_fim",
+    "prazo_inscricao",
+    "prazo_entrega_documentos",
+)
 
 # Tipo de callout do Obsidian/Quartz por campo (os demais usam "info").
 TIPOS_CALLOUT = {
@@ -93,7 +105,7 @@ CHAVES_ABAS = {
 
 CHAVES_DADOS = {
     "data início": "data_inicio",
-    "data final": "data_final",
+    "data final": "data_fim",
     "carga horária": "carga_horaria",
     "unidade": "unidade",
 }
@@ -211,9 +223,19 @@ def main() -> None:
     try:
         wait = WebDriverWait(driver, 20)
         oportunidades = listar_cursos_sobral(driver, wait)
-        cursos = [capturar_detalhes(driver, wait, curso) for curso in oportunidades]
+        cursos, falhas = coletar_com_tolerancia(
+            oportunidades,
+            coletar=lambda curso: capturar_detalhes(driver, wait, curso),
+            descrever=lambda curso: (curso["curso"], curso["url"]),
+        )
+        if not cursos:
+            raise RuntimeError("Nenhuma oportunidade foi coletada com sucesso.")
 
-        salvar_csv(ARQUIVO_CSV, CAMPOS, cursos)
+        salvar_csv(
+            ARQUIVO_CSV,
+            CAMPOS,
+            [datas_para_iso(curso, CAMPOS_DATA) for curso in cursos],
+        )
         salvar_markdown(
             ARQUIVO_MARKDOWN,
             cabecalho=[
@@ -236,6 +258,7 @@ def main() -> None:
             f"{len(cursos)} oportunidades PSG do Senac Sobral salvas em "
             f"{ARQUIVO_CSV} e {ARQUIVO_MARKDOWN}"
         )
+        relatar_falhas(falhas)
     finally:
         driver.quit()
 
