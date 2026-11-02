@@ -1,15 +1,20 @@
 """Captura oportunidades de cursos PSG da unidade Senac Sobral."""
 
-import csv
-import re
-
 from selenium import webdriver
-from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
-from webdriver_manager.chrome import ChromeDriverManager
+
+from comum import (
+    configurar_log,
+    criar_driver,
+    ler_abas,
+    normalizar_rotulo,
+    salvar_csv,
+    salvar_markdown,
+    texto,
+)
 
 URL = "https://psg.ce.senac.br/oportunidades/"
 ARQUIVO_CSV = "cursos_senac_sobral_psg.csv"
@@ -79,15 +84,6 @@ CHAVES_DADOS = {
 }
 
 
-def texto(elemento: WebElement, seletor: str) -> str:
-    elementos = elemento.find_elements(By.CSS_SELECTOR, seletor)
-    return elementos[0].text.strip() if elementos else ""
-
-
-def normalizar_rotulo(rotulo: str) -> str:
-    return re.sub(r"\s+", " ", rotulo).strip().rstrip(":").casefold()
-
-
 def unidade_do_cartao(cartao: WebElement) -> str:
     informacoes = cartao.find_elements(By.CSS_SELECTOR, ".opportunities__info")
     return " ".join(informacoes[2].text.split()) if len(informacoes) >= 3 else ""
@@ -98,9 +94,7 @@ def listar_cursos_sobral(
 ) -> list[dict[str, str]]:
     driver.get(URL)
     wait.until(
-        EC.presence_of_all_elements_located(
-            (By.CSS_SELECTOR, ".opportunities__box")
-        )
+        EC.presence_of_all_elements_located((By.CSS_SELECTOR, ".opportunities__box"))
     )
 
     driver.find_element(By.ID, "dropdownMenuLink").click()
@@ -130,14 +124,9 @@ def listar_cursos_sobral(
 
     wait.until(
         lambda navegador: (
-            (
-                cartoes := navegador.find_elements(
-                    By.CSS_SELECTOR, ".opportunities__box"
-                )
-            )
+            (cartoes := navegador.find_elements(By.CSS_SELECTOR, ".opportunities__box"))
             and all(
-                "sobral" in unidade_do_cartao(cartao).casefold()
-                for cartao in cartoes
+                "sobral" in unidade_do_cartao(cartao).casefold() for cartao in cartoes
             )
         )
     )
@@ -179,7 +168,9 @@ def capturar_detalhes(
     driver: webdriver.Chrome, wait: WebDriverWait, curso: dict[str, str]
 ) -> dict[str, str]:
     driver.get(curso["url"])
-    wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, ".content__description")))
+    wait.until(
+        EC.presence_of_element_located((By.CSS_SELECTOR, ".content__description"))
+    )
 
     detalhes = curso.copy()
     detalhes["descricao"] = texto(driver, ".content__description")
@@ -192,80 +183,33 @@ def capturar_detalhes(
             if chave:
                 detalhes[chave] = valor.text.strip()
 
-    cabecalhos = driver.find_elements(By.CSS_SELECTOR, ".tab-header-item")
-    for indice, cabecalho in enumerate(cabecalhos):
-        paineis = driver.find_elements(By.CSS_SELECTOR, ".tab-content-item")
-        if indice >= len(paineis):
-            continue
-
-        driver.execute_script("arguments[0].click()", cabecalho)
-        wait.until(
-            lambda navegador, i=indice: len(
-                navegador.find_elements(By.CSS_SELECTOR, ".tab-content-item")
-            )
-            > i
-            and "is-active"
-            in navegador.find_elements(By.CSS_SELECTOR, ".tab-content-item")[
-                i
-            ].get_attribute("class")
-        )
-
-        rotulo = normalizar_rotulo(cabecalho.text)
-        chave = CHAVES_ABAS.get(rotulo)
-        if chave:
-            paineis = driver.find_elements(By.CSS_SELECTOR, ".tab-content-item")
-            detalhes[chave] = paineis[indice].text.strip()
+    detalhes.update(ler_abas(driver, wait, CHAVES_ABAS))
 
     return detalhes
 
 
-def salvar_markdown(cursos: list[dict[str, str]]) -> None:
-    linhas = [
-        "# Cursos PSG do Senac Sobral",
-        "",
-        f"**Catálogo:** [Senac Ceará PSG]({URL})",
-        "",
-    ]
-
-    for curso in cursos:
-        linhas.extend(
-            [
-                f"## {curso['curso']}",
-                "",
-                f"[Abrir oportunidade]({curso['url']})",
-                "",
-            ]
-        )
-        for campo, rotulo in ROTULOS_MARKDOWN.items():
-            valor = curso.get(campo, "").strip()
-            if valor:
-                linhas.append(f"> [!info] {rotulo}")
-                linhas.extend(
-                    f"> {linha}" if linha else ">" for linha in valor.splitlines()
-                )
-                linhas.append("")
-
-    with open(ARQUIVO_MARKDOWN, "w", encoding="utf-8") as arquivo:
-        arquivo.write("\n".join(linhas).rstrip() + "\n")
-
-
 def main() -> None:
-    service = Service(ChromeDriverManager().install())
-    driver = webdriver.Chrome(service=service)
+    configurar_log()
+    driver = criar_driver()
 
     try:
         wait = WebDriverWait(driver, 20)
         oportunidades = listar_cursos_sobral(driver, wait)
-        cursos = [
-            capturar_detalhes(driver, wait, curso) for curso in oportunidades
-        ]
+        cursos = [capturar_detalhes(driver, wait, curso) for curso in oportunidades]
 
-        with open(ARQUIVO_CSV, "w", newline="", encoding="utf-8-sig") as arquivo:
-            escritor = csv.DictWriter(arquivo, fieldnames=CAMPOS)
-            escritor.writeheader()
-            escritor.writerows(cursos)
-
-        salvar_markdown(cursos)
+        salvar_csv(ARQUIVO_CSV, CAMPOS, cursos)
+        salvar_markdown(
+            ARQUIVO_MARKDOWN,
+            cabecalho=[
+                "# Cursos PSG do Senac Sobral",
+                "",
+                f"**Catálogo:** [Senac Ceará PSG]({URL})",
+                "",
+            ],
+            rotulo_link="Abrir oportunidade",
+            registros=cursos,
+            rotulos=ROTULOS_MARKDOWN,
+        )
         print(
             f"{len(cursos)} oportunidades PSG do Senac Sobral salvas em "
             f"{ARQUIVO_CSV} e {ARQUIVO_MARKDOWN}"

@@ -2,7 +2,7 @@
 
 Catálogo consultado em [Senac Ceará](https://cursos.ce.senac.br/unidade/senac-sobral/).
 
-**Coletado em:** 2026-11-02 18:12
+**Coletado em:** 2026-11-02 18:43
 
 ## POWER BI EXPERT - 2026.12.397
 

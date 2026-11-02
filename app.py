@@ -1,6 +1,5 @@
 """Captura os cursos disponíveis na unidade Senac Sobral."""
 
-import csv
 import logging
 import re
 from datetime import datetime
@@ -10,20 +9,24 @@ from selenium.common.exceptions import (
     StaleElementReferenceException,
     TimeoutException,
 )
-from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
-from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
-from webdriver_manager.chrome import ChromeDriverManager
+
+from comum import (
+    configurar_log,
+    criar_driver,
+    ler_abas,
+    salvar_csv,
+    salvar_markdown,
+    texto,
+)
 
 URL = "https://cursos.ce.senac.br/unidade/senac-sobral/"
 ARQUIVO_CSV = "cursos_senac_sobral.csv"
 ARQUIVO_MARKDOWN = "cursos_senac_sobral.md"
 
 SELETOR_LINKS_CURSOS = 'a.content__title[href*="/produto/"]'
-SELETOR_CABECALHOS = ".tab-header-item"
-SELETOR_PAINEIS = ".tab-content-item"
 
 # 1.1 - Lista de colunas do CSV centralizada (ordem idêntica à anterior).
 CAMPOS = [
@@ -78,7 +81,6 @@ ROTULOS_MARKDOWN = {
 # 1.2 - Erros que justificam pular um curso sem abortar a coleta inteira.
 ERROS_TOLERADOS = (TimeoutException, StaleElementReferenceException)
 
-logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
 log = logging.getLogger(__name__)
 
 # 2.1 - Linhas de traços usadas pelo site como divisor dentro de uma mesma aba.
@@ -170,21 +172,6 @@ def enriquecer(detalhes: dict[str, str]) -> None:
     detalhes.update(parsear_requisitos(detalhes.get("requisitos", "")))
 
 
-def texto_do_primeiro_elemento(
-    driver: webdriver.Chrome | WebElement, seletor: str
-) -> str:
-    elementos = driver.find_elements(By.CSS_SELECTOR, seletor)
-    return elementos[0].text.strip() if elementos else ""
-
-
-def painel_ativo(navegador: webdriver.Chrome, indice: int) -> bool:
-    """1.3 - Só consulta o painel se ele já existir no DOM."""
-    paineis = navegador.find_elements(By.CSS_SELECTOR, SELETOR_PAINEIS)
-    return len(paineis) > indice and "is-active" in (
-        paineis[indice].get_attribute("class") or ""
-    )
-
-
 def capturar_detalhes(
     driver: webdriver.Chrome, wait: WebDriverWait, url: str, titulo: str
 ) -> dict[str, str]:
@@ -194,83 +181,24 @@ def capturar_detalhes(
     detalhes = {
         "curso": titulo,
         "url": url,
-        "descricao": texto_do_primeiro_elemento(driver, ".content__description"),
-        "preco": limpar_preco(texto_do_primeiro_elemento(driver, ".item-prices")),
+        "descricao": texto(driver, ".content__description"),
+        "preco": limpar_preco(texto(driver, ".item-prices")),
     }
 
     for item in driver.find_elements(By.CSS_SELECTOR, ".bar-item-content"):
-        rotulo = texto_do_primeiro_elemento(item, ".item-content__label").rstrip(":")
-        valor = texto_do_primeiro_elemento(item, ".item-content__info")
+        rotulo = texto(item, ".item-content__label").rstrip(":")
+        valor = texto(item, ".item-content__info")
         if rotulo:
             detalhes[rotulo.lower().replace(" ", "_")] = valor
 
-    total_abas = len(driver.find_elements(By.CSS_SELECTOR, SELETOR_CABECALHOS))
-    for indice in range(total_abas):
-        # 1.3 - Reconsulta o cabeçalho a cada volta para evitar elemento "stale".
-        cabecalhos = driver.find_elements(By.CSS_SELECTOR, SELETOR_CABECALHOS)
-        if indice >= len(cabecalhos):
-            break
-        cabecalho = cabecalhos[indice]
-
-        nome = cabecalho.text.strip()
-        driver.execute_script("arguments[0].click()", cabecalho)
-        wait.until(lambda navegador, i=indice: painel_ativo(navegador, i))
-
-        chave = ABAS_DETALHES.get(nome.casefold(), nome.casefold().replace(" ", "_"))
-        paineis = driver.find_elements(By.CSS_SELECTOR, SELETOR_PAINEIS)
-        valor = paineis[indice].text.strip()
+    abas = ler_abas(driver, wait, ABAS_DETALHES, aceitar_desconhecidas=True)
+    for chave, valor in abas.items():
         if chave in CAMPOS_COM_SEPARADOR:
             valor = limpar_separadores(valor)
         detalhes[chave] = valor
 
     enriquecer(detalhes)
     return detalhes
-
-
-def salvar_csv(cursos: list[dict[str, str]]) -> None:
-    # 1.1 - Chaves fora de CAMPOS são ignoradas, mas avisadas no log.
-    extras = {chave for curso in cursos for chave in curso} - set(CAMPOS)
-    if extras:
-        log.warning("Campos novos ignorados no CSV: %s", ", ".join(sorted(extras)))
-
-    with open(ARQUIVO_CSV, "w", newline="", encoding="utf-8-sig") as arquivo:
-        escritor = csv.DictWriter(
-            arquivo, fieldnames=CAMPOS, extrasaction="ignore", restval=""
-        )
-        escritor.writeheader()
-        escritor.writerows(cursos)
-
-
-def salvar_markdown(cursos: list[dict[str, str]], coletado_em: str) -> None:
-    linhas = [
-        "# Cursos do Senac Sobral",
-        "",
-        f"Catálogo consultado em [Senac Ceará]({URL}).",
-        "",
-        f"**Coletado em:** {coletado_em}",
-        "",
-    ]
-
-    for curso in cursos:
-        linhas.extend(
-            [
-                f"## {curso['curso']}",
-                "",
-                f"[Abrir página do curso]({curso['url']})",
-                "",
-            ]
-        )
-        for campo, rotulo in ROTULOS_MARKDOWN.items():
-            valor = curso.get(campo, "").strip()
-            if valor:
-                linhas.append(f"> [!info] {rotulo}")
-                linhas.extend(
-                    f"> {linha}" if linha else ">" for linha in valor.splitlines()
-                )
-                linhas.append("")
-
-    with open(ARQUIVO_MARKDOWN, "w", encoding="utf-8") as arquivo:
-        arquivo.write("\n".join(linhas).rstrip() + "\n")
 
 
 def listar_cursos(driver: webdriver.Chrome, wait: WebDriverWait) -> dict[str, str]:
@@ -295,8 +223,8 @@ def listar_cursos(driver: webdriver.Chrome, wait: WebDriverWait) -> dict[str, st
 
 
 def main() -> None:
-    service = Service(ChromeDriverManager().install())
-    driver = webdriver.Chrome(service=service)
+    configurar_log()
+    driver = criar_driver()
 
     try:
         wait = WebDriverWait(driver, 20)
@@ -321,8 +249,21 @@ def main() -> None:
         if not cursos:
             raise RuntimeError("Nenhum curso foi coletado com sucesso.")
 
-        salvar_csv(cursos)
-        salvar_markdown(cursos, coletado_em)
+        salvar_csv(ARQUIVO_CSV, CAMPOS, cursos)
+        salvar_markdown(
+            ARQUIVO_MARKDOWN,
+            cabecalho=[
+                "# Cursos do Senac Sobral",
+                "",
+                f"Catálogo consultado em [Senac Ceará]({URL}).",
+                "",
+                f"**Coletado em:** {coletado_em}",
+                "",
+            ],
+            rotulo_link="Abrir página do curso",
+            registros=cursos,
+            rotulos=ROTULOS_MARKDOWN,
+        )
         print(f"{len(cursos)} cursos salvos em {ARQUIVO_CSV} e {ARQUIVO_MARKDOWN}")
 
         if falhas:
