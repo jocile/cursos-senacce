@@ -3,14 +3,23 @@ tags:
   - "senac"
   - "cursos"
 unidade: "Senac Sobral"
-coletado_em: "2026-11-02 19:31"
+coletado_em: "2026-11-02 19:45"
 ---
 
 # Cursos do Senac Sobral
 
 Catálogo consultado em [Senac Ceará](https://cursos.ce.senac.br/unidade/senac-sobral/).
 
-**Coletado em:** 2026-11-02 19:31
+**Coletado em:** 2026-11-02 19:45
+
+| Curso | Início | Fim | Dias | Horário | Carga horária | Preço (R$) | Idade mín. |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| [POWER BI EXPERT - 2026.12.397](https://cursos.ce.senac.br/produto/power-bi-expert-2026-12-397/) | 2026-11-10 | 2026-12-03 | TER QUI | 18:30 às 21:30 | 32h | 196.00 | 14 |
+| [ALFAIATARIA FEMININA (MODELAGEM TRIDIMENSIONAL E COSTURA) - SOBRAL - 2026.12.305](https://cursos.ce.senac.br/produto/alfaiataria-feminina-modelagem-tridimensional-e-costura-sobral-2026-12-305/) | 2026-11-16 | 2026-12-07 | SEG TER QUA QUI SEX | 18:30 às 21:30 | 60h | 402.50 | 18 |
+| [CABELEIREIRO - SOBRAL - NOITE - 2026.12.355](https://cursos.ce.senac.br/produto/cabeleireiro-sobral-noite-2026-12-355/) | 2026-11-09 | 2027-02-18 | SEG TER QUA QUI SEX | 18:30 às 21:30 | 280h | 1656.90 | 18 |
+| [OPERAÇÃO DE DRONES - SOBRAL - MANHÃ/TARDE/NOITE - 2026.12.349](https://cursos.ce.senac.br/produto/operacao-de-drones-sobral-manha-tarde-noite-2026-12-349/) | 2026-11-06 | 2026-11-14 | SEX SÁB | SEX (18:00 às 21:00) , SÁB (08:00 às 11:30 / 13:30 às 17:00) | 20h | 267.40 | 17 |
+| [GESTÃO E LIDERANÇA DE EQUIPES - SOBRAL - NOITE - 2026.12.384](https://cursos.ce.senac.br/produto/gestao-e-lideranca-de-equipes-sobral-noite-2026-12-384/) | 2026-11-03 | 2026-12-03 | TER QUA QUI | 18:30 às 21:30 | 60h | 319.20 | 18 |
+| [SALGADOS COMERCIAIS - SOBRAL - NOITE - 2026.12.394](https://cursos.ce.senac.br/produto/salgados-comerciais-sobral-noite-2026-12-394/) | 2026-11-09 | 2026-11-13 | SEG TER QUA QUI SEX | 18:30 às 21:30 | 20h | 170.10 | 16 |
 
 ## POWER BI EXPERT - 2026.12.397
 

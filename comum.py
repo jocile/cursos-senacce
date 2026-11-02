@@ -208,6 +208,31 @@ def _frontmatter(dados: dict[str, str | list[str]]) -> list[str]:
     return linhas
 
 
+def _celula(valor: str) -> str:
+    """Texto seguro para célula de tabela Markdown (sem '|' nem quebras de linha)."""
+    return " ".join(valor.split()).replace("|", "\\|")
+
+
+def _tabela_resumo(
+    registros: list[dict[str, str]],
+    colunas: Sequence[tuple[str, str]],
+    rotulo_primeira_coluna: str,
+) -> list[str]:
+    """Tabela com uma linha por registro; a primeira coluna é o nome com link."""
+    titulos = [rotulo_primeira_coluna, *(titulo for _, titulo in colunas)]
+    linhas = [
+        "| " + " | ".join(titulos) + " |",
+        "|" + "|".join(" --- " for _ in titulos) + "|",
+    ]
+    for registro in registros:
+        nome = _celula(registro["curso"])
+        celulas = [f"[{nome}]({registro['url']})"]
+        celulas.extend(_celula(registro.get(campo, "")) for campo, _ in colunas)
+        linhas.append("| " + " | ".join(celulas) + " |")
+    linhas.append("")
+    return linhas
+
+
 def salvar_markdown(
     caminho: str | Path,
     cabecalho: list[str],
@@ -217,15 +242,25 @@ def salvar_markdown(
     *,
     tipos: dict[str, str] | None = None,
     frontmatter: dict[str, str | list[str]] | None = None,
+    resumo: Sequence[tuple[str, str]] | None = None,
+    registros_resumo: list[dict[str, str]] | None = None,
+    rotulo_resumo: str = "Curso",
 ) -> None:
     """Gera o relatório com um callout por campo preenchido.
 
     `tipos` mapeia campo -> tipo do callout (padrão: info); `frontmatter`,
-    se dado, é gravado como bloco YAML no topo do arquivo.
+    se dado, é gravado como bloco YAML no topo do arquivo. `resumo` lista as
+    colunas (campo, título) de uma tabela exibida logo após o cabeçalho, com o
+    nome de cada item como link; os valores vêm de `registros_resumo` (padrão:
+    `registros`), o que permite mostrar, por exemplo, datas já normalizadas.
     """
     tipos = tipos or {}
     linhas = _frontmatter(frontmatter) if frontmatter else []
     linhas.extend(cabecalho)
+    if resumo:
+        linhas.extend(
+            _tabela_resumo(registros_resumo or registros, resumo, rotulo_resumo)
+        )
 
     for registro in registros:
         linhas.extend(

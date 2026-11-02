@@ -3,12 +3,22 @@ tags:
   - "senac"
   - "psg"
 unidade: "Senac Sobral"
-coletado_em: "2026-11-02 19:32"
+coletado_em: "2026-11-02 19:45"
 ---
 
 # Cursos PSG do Senac Sobral
 
 **Catálogo:** [Senac Ceará PSG](https://psg.ce.senac.br/oportunidades/)
+
+| Oportunidade | Categoria | Início | Fim | Carga horária | Prazo de inscrição |
+| --- | --- | --- | --- | --- | --- |
+| [2026.12.404 – Bolos, Recheios e Coberturas](https://psg.ce.senac.br/oportunidade/2026-12-404-bolos-recheios-e-coberturas/) | PRODUÇÃO DE ALIMENTOS | 2026-11-09 | 2026-11-13 | 20h | 2026-11-10 |
+| [2026.12.361 – Bases da cozinha](https://psg.ce.senac.br/oportunidade/2026-12-361-bases-da-cozinha/) | GASTRONOMIA | 2026-10-26 | 2026-11-16 | 60h | 2026-10-27 |
+| [Formação – Programação em Python](https://psg.ce.senac.br/oportunidade/formacao-programacao-em-python-3/) | TECNOLOGIA DA INFORMAÇÃO (TI) | 2026-10-21 | 2026-12-16 | 156 | 2026-10-21 |
+| [Depilador](https://psg.ce.senac.br/oportunidade/depilador-3/) | BELEZA E ESTÉTICA | 2026-10-19 | 2026-12-15 | 160 | 2026-10-19 |
+| [Recepcionista](https://psg.ce.senac.br/oportunidade/recepcionista-5/) | GESTÃO | 2026-10-19 | 2026-12-15 | 160 | 2026-10-19 |
+| [Cuidador de Idoso](https://psg.ce.senac.br/oportunidade/cuidador-de-idoso-2/) | SAÚDE | 2026-10-21 | 2026-12-17 | 160 | 2026-10-21 |
+| [Cuidador Infantil](https://psg.ce.senac.br/oportunidade/cuidador-infantil-2/) | SAÚDE | 2026-10-14 | 2026-12-10 | 160 | 2026-10-14 |
 
 ## 2026.12.404 – Bolos, Recheios e Coberturas
 

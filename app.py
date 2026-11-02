@@ -92,6 +92,17 @@ TIPOS_CALLOUT = {
     "mais_informacoes": "warning",
 }
 
+# Colunas (campo do CSV, título) da tabela de resumo no topo do Markdown.
+RESUMO_MARKDOWN = [
+    ("data_inicio", "Início"),
+    ("data_fim", "Fim"),
+    ("dias_semana", "Dias"),
+    ("horario", "Horário"),
+    ("carga_horaria", "Carga horária"),
+    ("preco_por", "Preço (R$)"),
+    ("idade_minima", "Idade mín."),
+]
+
 # 4.4 - Rótulos da barra de dados do site -> colunas sem acento.
 CHAVES_DADOS = {
     "data": "data",
@@ -262,11 +273,8 @@ def main() -> None:
         for curso in cursos:
             curso["coletado_em"] = coletado_em
 
-        salvar_csv(
-            ARQUIVO_CSV,
-            CAMPOS,
-            [datas_para_iso(curso, CAMPOS_DATA) for curso in cursos],
-        )
+        cursos_csv = [datas_para_iso(curso, CAMPOS_DATA) for curso in cursos]
+        salvar_csv(ARQUIVO_CSV, CAMPOS, cursos_csv)
         salvar_markdown(
             ARQUIVO_MARKDOWN,
             cabecalho=[
@@ -281,6 +289,8 @@ def main() -> None:
             registros=cursos,
             rotulos=ROTULOS_MARKDOWN,
             tipos=TIPOS_CALLOUT,
+            resumo=RESUMO_MARKDOWN,
+            registros_resumo=cursos_csv,
             frontmatter={
                 "tags": ["senac", "cursos"],
                 "unidade": "Senac Sobral",

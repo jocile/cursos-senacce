@@ -81,6 +81,15 @@ CAMPOS_DATA = (
     "prazo_entrega_documentos",
 )
 
+# Colunas (campo do CSV, título) da tabela de resumo no topo do Markdown.
+RESUMO_MARKDOWN = [
+    ("categoria", "Categoria"),
+    ("data_inicio", "Início"),
+    ("data_fim", "Fim"),
+    ("carga_horaria", "Carga horária"),
+    ("prazo_inscricao", "Prazo de inscrição"),
+]
+
 # Tipo de callout do Obsidian/Quartz por campo (os demais usam "info").
 TIPOS_CALLOUT = {
     "descricao": "abstract",
@@ -231,11 +240,8 @@ def main() -> None:
         if not cursos:
             raise RuntimeError("Nenhuma oportunidade foi coletada com sucesso.")
 
-        salvar_csv(
-            ARQUIVO_CSV,
-            CAMPOS,
-            [datas_para_iso(curso, CAMPOS_DATA) for curso in cursos],
-        )
+        cursos_csv = [datas_para_iso(curso, CAMPOS_DATA) for curso in cursos]
+        salvar_csv(ARQUIVO_CSV, CAMPOS, cursos_csv)
         salvar_markdown(
             ARQUIVO_MARKDOWN,
             cabecalho=[
@@ -248,6 +254,9 @@ def main() -> None:
             registros=cursos,
             rotulos=ROTULOS_MARKDOWN,
             tipos=TIPOS_CALLOUT,
+            resumo=RESUMO_MARKDOWN,
+            registros_resumo=cursos_csv,
+            rotulo_resumo="Oportunidade",
             frontmatter={
                 "tags": ["senac", "psg"],
                 "unidade": "Senac Sobral",
