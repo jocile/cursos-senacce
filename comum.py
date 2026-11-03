@@ -8,7 +8,7 @@ import re
 from collections.abc import Callable, Sequence
 from datetime import datetime
 from pathlib import Path
-from typing import TypeVar
+from typing import NamedTuple, TypeVar
 
 from selenium import webdriver
 from selenium.common.exceptions import (
@@ -233,28 +233,104 @@ def _tabela_resumo(
     return linhas
 
 
+def compactar(texto: str) -> str:
+    """Junta quebras de linha e espaços repetidos em um único espaço."""
+    return " ".join(texto.split())
+
+
+def data_br(texto: str) -> str:
+    """Primeira data do texto (ISO ou dd/mm/aaaa) como dd/mm/aaaa.
+
+    Se não houver data reconhecível, devolve o texto compactado.
+    """
+    iso = re.search(r"(\d{4})-(\d{2})-(\d{2})", texto)
+    if iso:
+        return f"{iso.group(3)}/{iso.group(2)}/{iso.group(1)}"
+    br = re.search(r"\d{1,2}/\d{1,2}/(?:\d{4}|\d{2})\b", texto)
+    if br and (convertida := data_iso(br.group())):
+        ano, mes, dia = convertida.split("-")
+        return f"{dia}/{mes}/{ano}"
+    return compactar(texto)
+
+
+def brl(valor: str) -> str:
+    """'2367.00' -> 'R$ 2.367,00'; devolve o texto original se não for número."""
+    try:
+        numero = float(valor)
+    except ValueError:
+        return valor
+    return "R$ " + f"{numero:,.2f}".replace(",", "X").replace(".", ",").replace(
+        "X", "."
+    )
+
+
+def formatar_carga(texto: str) -> str:
+    """'156' -> '156h'; textos que já têm unidade ('20h') ficam como estão."""
+    texto = compactar(texto)
+    return f"{texto}h" if texto.isdigit() else texto
+
+
+class Secao(NamedTuple):
+    """Campo exibido como callout interno dentro do callout do item."""
+
+    campo: str
+    rotulo: str
+    tipo: str = "info"
+    lista: bool = False  # uma linha do texto vira um item de lista
+    aberta: bool = False  # False: recolhido (`-`); True: aberto, mas recolhível (`+`)
+
+
+def _callout_do_item(
+    registro: dict[str, str],
+    ficha: Callable[[dict[str, str]], tuple[str, list[str]]],
+    secoes: Sequence[Secao],
+    tipo_ficha: str,
+) -> list[str]:
+    titulo, linhas_ficha = ficha(registro)
+    saida = [f"> [!{tipo_ficha}] {titulo or 'Informações'}"]
+    saida.extend(f"> {linha}" for linha in linhas_ficha if linha)
+
+    for secao in secoes:
+        valor = registro.get(secao.campo, "").strip()
+        if not valor:
+            continue
+        linhas = valor.splitlines()
+        if secao.lista and len(linhas) > 1:
+            linhas = [f"- {linha.strip()}" for linha in linhas if linha.strip()]
+
+        marcador = "+" if secao.aberta else "-"
+        saida.append(">")
+        saida.append(f"> > [!{secao.tipo}]{marcador} {secao.rotulo}")
+        if linhas[0].startswith("- "):
+            saida.append("> >")  # linha em branco antes da lista (MD032)
+        saida.extend(f"> > {linha}" if linha.strip() else "> >" for linha in linhas)
+
+    saida.append("")
+    return saida
+
+
 def salvar_markdown(
     caminho: str | Path,
     cabecalho: list[str],
     rotulo_link: str,
     registros: list[dict[str, str]],
-    rotulos: dict[str, str],
     *,
-    tipos: dict[str, str] | None = None,
+    ficha: Callable[[dict[str, str]], tuple[str, list[str]]],
+    secoes: Sequence[Secao],
+    tipo_ficha: str = "info",
     frontmatter: dict[str, str | list[str]] | None = None,
     resumo: Sequence[tuple[str, str]] | None = None,
     registros_resumo: list[dict[str, str]] | None = None,
     rotulo_resumo: str = "Curso",
 ) -> None:
-    """Gera o relatório com um callout por campo preenchido.
+    """Gera o relatório: um callout compacto por item.
 
-    `tipos` mapeia campo -> tipo do callout (padrão: info); `frontmatter`,
-    se dado, é gravado como bloco YAML no topo do arquivo. `resumo` lista as
-    colunas (campo, título) de uma tabela exibida logo após o cabeçalho, com o
-    nome de cada item como link; os valores vêm de `registros_resumo` (padrão:
-    `registros`), o que permite mostrar, por exemplo, datas já normalizadas.
+    `ficha(registro)` devolve (título do callout, linhas de destaque) e cada
+    `Secao` vira um callout interno recolhível com o texto longo do campo.
+    `frontmatter` é gravado como bloco YAML no topo; `resumo` lista as colunas
+    (campo, título) de uma tabela exibida logo após o cabeçalho, com valores de
+    `registros_resumo` (padrão: `registros`).
     """
-    tipos = tipos or {}
     linhas = _frontmatter(frontmatter) if frontmatter else []
     linhas.extend(cabecalho)
     if resumo:
@@ -271,14 +347,7 @@ def salvar_markdown(
                 "",
             ]
         )
-        for campo, rotulo in rotulos.items():
-            valor = registro.get(campo, "").strip()
-            if valor:
-                linhas.append(f"> [!{tipos.get(campo, 'info')}] {rotulo}")
-                linhas.extend(
-                    f"> {linha}" if linha else ">" for linha in valor.splitlines()
-                )
-                linhas.append("")
+        linhas.extend(_callout_do_item(registro, ficha, secoes, tipo_ficha))
 
     with open(caminho, "w", encoding="utf-8") as arquivo:
         arquivo.write("\n".join(linhas).rstrip() + "\n")

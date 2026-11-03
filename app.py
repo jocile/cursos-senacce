@@ -11,11 +11,16 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 
 from comum import (
+    Secao,
+    brl,
     coletar_com_tolerancia,
+    compactar,
     configurar_log,
     criar_driver,
+    data_br,
     data_iso,
     datas_para_iso,
+    formatar_carga,
     ler_abas,
     ler_argumentos,
     normalizar_rotulo,
@@ -68,29 +73,13 @@ ABAS_DETALHES = {
     "formas de pagamento": "formas_pagamento",
     "mais informações": "mais_informacoes",
 }
-ROTULOS_MARKDOWN = {
-    "descricao": "Descrição",
-    "preco": "Preço",
-    "data": "Data",
-    "horario": "Horário",
-    "carga_horaria": "Carga horária",
-    "unidade": "Unidade",
-    "requisitos": "Requisitos",
-    "periodo": "Período",
-    "conteudo": "Conteúdo programático",
-    "formas_pagamento": "Formas de pagamento",
-    "mais_informacoes": "Mais informações",
-}
-
-# 4.3 - Tipo de callout do Obsidian/Quartz por campo (os demais usam "info").
-TIPOS_CALLOUT = {
-    "descricao": "abstract",
-    "preco": "tip",
-    "requisitos": "note",
-    "conteudo": "example",
-    "formas_pagamento": "tip",
-    "mais_informacoes": "warning",
-}
+# Callouts internos recolhíveis (campo, rótulo, tipo) abaixo da ficha de cada curso.
+SECOES = [
+    Secao("descricao", "Descrição", "abstract", aberta=True),
+    Secao("conteudo", "Conteúdo programático", "example", lista=True),
+    Secao("formas_pagamento", "Formas de pagamento", "tip"),
+    Secao("mais_informacoes", "Mais informações", "warning"),
+]
 
 # Colunas (campo do CSV, título) da tabela de resumo no topo do Markdown.
 RESUMO_MARKDOWN = [
@@ -128,6 +117,48 @@ def chave_do_rotulo(rotulo: str) -> str:
     """Rótulo do site -> nome da coluna; rótulos novos viram snake_case."""
     normalizado = normalizar_rotulo(rotulo)
     return CHAVES_DADOS.get(normalizado, normalizado.replace(" ", "_"))
+
+
+def formatar_preco(curso: dict[str, str]) -> str:
+    """'~~R$ 280,00~~ **R$ 196,00** (até 4x de R$ 49,00)'; cai no texto cru se faltar dado."""
+    de, por = curso.get("preco_de", ""), curso.get("preco_por", "")
+    if not por:
+        return " · ".join(
+            compactar(linha) for linha in curso.get("preco", "").splitlines()
+        )
+    texto = f"~~{brl(de)}~~ **{brl(por)}**" if de and de != por else f"**{brl(por)}**"
+    if curso.get("parcelas") and curso.get("valor_parcela"):
+        texto += f" (até {curso['parcelas']}x de {brl(curso['valor_parcela'])})"
+    return texto
+
+
+def ficha_curso(curso: dict[str, str]) -> tuple[str, list[str]]:
+    """Título e linhas de destaque do callout principal do curso."""
+    inicio = data_br(curso.get("data_inicio") or curso.get("data", ""))
+    fim = data_br(curso.get("data_fim", ""))
+    periodo = f"{inicio} a {fim}" if inicio and fim and inicio != fim else inicio
+    titulo = " · ".join(
+        parte
+        for parte in (
+            periodo or compactar(curso.get("periodo", "")),
+            formatar_carga(curso.get("carga_horaria", "")),
+        )
+        if parte
+    )
+
+    horario = " · ".join(
+        parte
+        for parte in (curso.get("dias_semana", ""), compactar(curso.get("horario", "")))
+        if parte
+    )
+    linhas = []
+    if horario:
+        linhas.append(f"**Horário:** {horario}")
+    if preco := formatar_preco(curso):
+        linhas.append(f"**Preço:** {preco}")
+    if requisitos := compactar(curso.get("requisitos", "")):
+        linhas.append(f"**Requisitos:** {requisitos}")
+    return titulo, linhas
 
 
 def limpar_separadores(valor: str) -> str:
@@ -287,8 +318,8 @@ def main() -> None:
             ],
             rotulo_link="Abrir página do curso",
             registros=cursos,
-            rotulos=ROTULOS_MARKDOWN,
-            tipos=TIPOS_CALLOUT,
+            ficha=ficha_curso,
+            secoes=SECOES,
             resumo=RESUMO_MARKDOWN,
             registros_resumo=cursos_csv,
             frontmatter={

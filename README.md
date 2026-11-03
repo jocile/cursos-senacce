@@ -28,11 +28,13 @@ execução:
 
 - **CSV:** UTF-8 com BOM, para abrir direto no Excel e filtrar em planilhas.
   Campos indisponíveis ficam vazios.
-- **Markdown:** frontmatter YAML (`tags`, `unidade`, `coletado_em`) e um callout
-  por campo, compatível com Obsidian e Quartz. Os tipos variam conforme o campo
-  (`abstract` para descrição, `tip` para preço, `warning` para prazos e avisos
-  etc.). Campos vazios são omitidos. Os textos e as datas aparecem como
-  publicados no site.
+- **Markdown:** frontmatter YAML (`tags`, `unidade`, `coletado_em`), uma tabela
+  de resumo com links no topo e, para cada item, **um único callout compacto**
+  (compatível com Obsidian e Quartz). O título do callout traz período, horário
+  e carga horária, e as linhas de destaque trazem preço, requisitos e prazos.
+  Os textos longos (descrição, conteúdo programático, formas de pagamento e
+  avisos) ficam em callouts internos recolhíveis. Campos vazios são omitidos. O
+  texto é o publicado no site, e as datas aparecem como dd/mm/aaaa.
 
 ## Requisitos
 

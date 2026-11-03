@@ -1,5 +1,6 @@
 """Captura oportunidades de cursos PSG da unidade Senac Sobral."""
 
+import re
 from datetime import datetime
 from pathlib import Path
 
@@ -10,10 +11,14 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 
 from comum import (
+    Secao,
     coletar_com_tolerancia,
+    compactar,
     configurar_log,
     criar_driver,
+    data_br,
     datas_para_iso,
+    formatar_carga,
     ler_abas,
     ler_argumentos,
     normalizar_rotulo,
@@ -51,27 +56,6 @@ CAMPOS = [
     "mais_informacoes",
 ]
 
-ROTULOS_MARKDOWN = {
-    "categoria": "Categoria",
-    "unidade": "Unidade",
-    "horario": "Horário",
-    "data": "Datas anunciadas",
-    "dias": "Dias da semana",
-    "situacao": "Inscrições",
-    "descricao": "Descrição",
-    "data_inicio": "Data de início",
-    "data_fim": "Data final",
-    "carga_horaria": "Carga horária",
-    "quantidade_vagas": "Quantidade de vagas ofertadas",
-    "periodicidade": "Periodicidade",
-    "pre_requisitos": "Pré-requisitos",
-    "escolaridade": "Escolaridade",
-    "idade_minima": "Idade mínima",
-    "prazo_inscricao": "Prazo para inscrição",
-    "prazo_entrega_documentos": "Prazo para entrega dos documentos",
-    "mais_informacoes": "Mais informações",
-}
-
 # Campos de data do CSV gravados em ISO (AAAA-MM-DD); o Markdown mantém o texto do site.
 CAMPOS_DATA = (
     "data",
@@ -81,6 +65,11 @@ CAMPOS_DATA = (
     "prazo_entrega_documentos",
 )
 
+# Callouts internos recolhíveis (campo, rótulo, tipo) abaixo da ficha de cada oportunidade.
+SECOES = [
+    Secao("descricao", "Descrição", "abstract", aberta=True),
+]
+
 # Colunas (campo do CSV, título) da tabela de resumo no topo do Markdown.
 RESUMO_MARKDOWN = [
     ("categoria", "Categoria"),
@@ -89,16 +78,6 @@ RESUMO_MARKDOWN = [
     ("carga_horaria", "Carga horária"),
     ("prazo_inscricao", "Prazo de inscrição"),
 ]
-
-# Tipo de callout do Obsidian/Quartz por campo (os demais usam "info").
-TIPOS_CALLOUT = {
-    "descricao": "abstract",
-    "pre_requisitos": "note",
-    "escolaridade": "note",
-    "idade_minima": "note",
-    "prazo_inscricao": "warning",
-    "prazo_entrega_documentos": "warning",
-}
 
 CHAVES_ABAS = {
     "quantidade de vagas ofertadas": "quantidade_vagas",
@@ -118,6 +97,65 @@ CHAVES_DADOS = {
     "carga horária": "carga_horaria",
     "unidade": "unidade",
 }
+
+
+def ficha_oportunidade(curso: dict[str, str]) -> tuple[str, list[str]]:
+    """Título e linhas de destaque do callout principal da oportunidade."""
+    inicio = data_br(curso.get("data_inicio", ""))
+    fim = data_br(curso.get("data_fim", ""))
+    periodo = f"{inicio} a {fim}" if inicio and fim and inicio != fim else inicio
+    titulo = " · ".join(
+        parte
+        for parte in (
+            periodo,
+            compactar(curso.get("horario", "")),
+            formatar_carga(curso.get("carga_horaria", "")),
+        )
+        if parte
+    )
+
+    linhas = []
+    if categoria := compactar(curso.get("categoria", "")):
+        linhas.append(f"**Categoria:** {categoria}")
+
+    # Prazos em destaque: são o que mais pesa na decisão.
+    inscricao = data_br(curso.get("prazo_inscricao", ""))
+    documentos = data_br(curso.get("prazo_entrega_documentos", ""))
+    partes = [compactar(curso.get("situacao", ""))]
+    if inscricao and inscricao == documentos:
+        partes.append(f"inscrição e documentos até {inscricao}")
+    else:
+        if inscricao:
+            partes.append(f"inscrição até {inscricao}")
+        if documentos:
+            partes.append(f"documentos até {documentos}")
+    if prazos := " · ".join(parte for parte in partes if parte):
+        linhas.append(f"**Prazos:** {prazos}")
+
+    vagas = re.search(r"\d+", curso.get("quantidade_vagas", ""))
+    periodicidade = compactar(curso.get("periodicidade", ""))
+    detalhes = [
+        f"{vagas.group()} vagas" if vagas else "",
+        # Intervalos de datas repetem o título; só dias da semana interessam.
+        "" if re.search(r"\d{2}/\d{2}", periodicidade) else periodicidade,
+    ]
+    if oferta := " · ".join(parte for parte in detalhes if parte):
+        linhas.append(f"**Oferta:** {oferta}")
+
+    requisitos = [
+        " · ".join(
+            compactar(linha).rstrip(".")
+            for linha in curso.get(campo, "").splitlines()
+            if linha.strip()
+        )
+        for campo in ("escolaridade", "idade_minima", "pre_requisitos")
+    ]
+    if texto := " · ".join(parte for parte in requisitos if parte):
+        linhas.append(f"**Requisitos:** {texto}")
+
+    if contato := compactar(curso.get("mais_informacoes", "")):
+        linhas.append(f"**Contato:** {contato}")
+    return titulo, linhas
 
 
 def unidade_do_cartao(cartao: WebElement) -> str:
@@ -252,8 +290,8 @@ def main() -> None:
             ],
             rotulo_link="Abrir oportunidade",
             registros=cursos,
-            rotulos=ROTULOS_MARKDOWN,
-            tipos=TIPOS_CALLOUT,
+            ficha=ficha_oportunidade,
+            secoes=SECOES,
             resumo=RESUMO_MARKDOWN,
             registros_resumo=cursos_csv,
             rotulo_resumo="Oportunidade",
