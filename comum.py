@@ -36,13 +36,18 @@ def configurar_log() -> None:
     logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
 
 
-def ler_argumentos(descricao: str | None = None) -> argparse.Namespace:
+def ler_argumentos(
+    descricao: str | None = None,
+    extras: Callable[[argparse.ArgumentParser], None] | None = None,
+) -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=descricao)
     parser.add_argument(
         "--visivel",
         action="store_true",
         help="abre o Chrome com janela (por padrão roda em modo headless)",
     )
+    if extras:
+        extras(parser)
     return parser.parse_args()
 
 
