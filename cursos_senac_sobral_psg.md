@@ -3,7 +3,7 @@ tags:
   - "senac"
   - "psg"
 unidade: "Senac Sobral"
-coletado_em: "2026-11-12 16:37"
+coletado_em: "2026-11-13 15:20"
 ---
 
 # Cursos PSG do Senac Sobral

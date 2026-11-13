@@ -46,6 +46,11 @@ def ler_argumentos(
         action="store_true",
         help="abre o Chrome com janela (por padrão roda em modo headless)",
     )
+    parser.add_argument(
+        "--csv",
+        action="store_true",
+        help="grava também o arquivo CSV (por padrão só o Markdown é gerado)",
+    )
     if extras:
         extras(parser)
     return parser.parse_args()
@@ -213,9 +218,14 @@ def _frontmatter(dados: dict[str, str | list[str]]) -> list[str]:
     return linhas
 
 
+def _escapar_cifrao(valor: str) -> str:
+    """Escapa '$' para o Quartz/KaTeX não tratar 'R$' como fórmula."""
+    return re.sub(r"(?<!\\)\$", r"\\$", valor)
+
+
 def _celula(valor: str) -> str:
-    """Texto seguro para célula de tabela Markdown (sem '|' nem quebras de linha)."""
-    return " ".join(valor.split()).replace("|", "\\|")
+    """Texto seguro para célula de tabela Markdown (sem '|', quebras de linha ou '$')."""
+    return _escapar_cifrao(" ".join(valor.split()).replace("|", "\\|"))
 
 
 def _tabela_resumo(
@@ -292,8 +302,8 @@ def _callout_do_item(
     tipo_ficha: str,
 ) -> list[str]:
     titulo, linhas_ficha = ficha(registro)
-    saida = [f"> [!{tipo_ficha}] {titulo or 'Informações'}"]
-    saida.extend(f"> {linha}" for linha in linhas_ficha if linha)
+    saida = [f"> [!{tipo_ficha}] {_escapar_cifrao(titulo) or 'Informações'}"]
+    saida.extend(f"> {_escapar_cifrao(linha)}" for linha in linhas_ficha if linha)
 
     for secao in secoes:
         valor = registro.get(secao.campo, "").strip()
@@ -308,7 +318,10 @@ def _callout_do_item(
         saida.append(f"> > [!{secao.tipo}]{marcador} {secao.rotulo}")
         if linhas[0].startswith("- "):
             saida.append("> >")  # linha em branco antes da lista (MD032)
-        saida.extend(f"> > {linha}" if linha.strip() else "> >" for linha in linhas)
+        saida.extend(
+            f"> > {_escapar_cifrao(linha)}" if linha.strip() else "> >"
+            for linha in linhas
+        )
 
     saida.append("")
     return saida

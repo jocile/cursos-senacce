@@ -278,8 +278,7 @@ def main() -> None:
         if not cursos:
             raise RuntimeError("Nenhuma oportunidade foi coletada com sucesso.")
 
-        cursos_csv = [datas_para_iso(curso, CAMPOS_DATA) for curso in cursos]
-        salvar_csv(ARQUIVO_CSV, CAMPOS, cursos_csv)
+        cursos_csv = [datas_para_iso(curso, CAMPOS_DATA) for curso in cursos]        
         salvar_markdown(
             ARQUIVO_MARKDOWN,
             cabecalho=[
@@ -301,9 +300,15 @@ def main() -> None:
                 "coletado_em": datetime.now().strftime("%Y-%m-%d %H:%M"),
             },
         )
+        arquivos = [ARQUIVO_MARKDOWN]
+
+        if args.csv:
+            salvar_csv(ARQUIVO_CSV, CAMPOS, cursos_csv)
+            arquivos.append(ARQUIVO_CSV)
+
         print(
             f"{len(cursos)} oportunidades PSG do Senac Sobral salvas em "
-            f"{ARQUIVO_CSV} e {ARQUIVO_MARKDOWN}"
+            + " e ".join(map(str, arquivos))
         )
         relatar_falhas(falhas)
     finally:

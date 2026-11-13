@@ -305,7 +305,6 @@ def main() -> None:
             curso["coletado_em"] = coletado_em
 
         cursos_csv = [datas_para_iso(curso, CAMPOS_DATA) for curso in cursos]
-        salvar_csv(ARQUIVO_CSV, CAMPOS, cursos_csv)
         salvar_markdown(
             ARQUIVO_MARKDOWN,
             cabecalho=[
@@ -328,7 +327,13 @@ def main() -> None:
                 "coletado_em": coletado_em,
             },
         )
-        print(f"{len(cursos)} cursos salvos em {ARQUIVO_CSV} e {ARQUIVO_MARKDOWN}")
+        arquivos = [ARQUIVO_MARKDOWN]
+
+        if args.csv:
+            salvar_csv(ARQUIVO_CSV, CAMPOS, cursos_csv)
+            arquivos.append(ARQUIVO_CSV)
+
+        print(f"{len(cursos)} cursos salvos em " + " e ".join(map(str, arquivos)))
         relatar_falhas(falhas)
     finally:
         driver.quit()

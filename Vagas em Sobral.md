@@ -4,34 +4,36 @@ tags:
   - "vagas"
   - "sobral"
 unidade: "Senac Sobral"
-coletado_em: "2026-11-12 16:18"
+coletado_em: "2026-11-13 15:19"
 ---
 
 # Vagas do Senac Ceará - Sobral
 
 Catálogo consultado em [Carreiras Senac Ceará](https://carreiras.ce.senac.br/vagas).
 
-**Coletado em:** 2026-11-12 16:18
+**Coletado em:** 2026-11-13 15:19
 
 | Cargo | Empresa | Contratação | Salário | Carga horária |
 | --- | --- | --- | --- | --- |
-| [Senac Ceará - Detalhes da Vaga: OPERADOR(A) DE CAIXA - LOJA DE CONVENIÊNCIA](#senac-ceara-detalhes-da-vaga-operadora-de-caixa-loja-de-conveniencia) | JRH Consultoria e Treinamento | Efetiva (CLT) | R$ 1621.00 Horários 12X36 Modelo de trabalho Presencial Compartilhe Compartilhe com um(a) amigo(a) |  |
-| [Senac Ceará - Detalhes da Vaga: SALGADEIRO(A)](#senac-ceara-detalhes-da-vaga-salgadeiroa) | JRH Consultoria e Treinamento | Efetiva (CLT) | R$ 1621.00 Horários Comercial Modelo de trabalho Presencial Compartilhe Compartilhe com um(a) amigo(a) |  |
-| [Senac Ceará - Detalhes da Vaga: CUMIM](#senac-ceara-detalhes-da-vaga-cumim) | JRH Consultoria e Treinamento | Efetiva (CLT) | R$ 1760.00 Horários 16:00 às 00:00 Modelo de trabalho Presencial Compartilhe Compartilhe com um(a) amigo(a) |  |
-| [Senac Ceará - Detalhes da Vaga: AUXILIAR DE PIZZAIOLO (NOÇÕES DE COZINHA)](#senac-ceara-detalhes-da-vaga-auxiliar-de-pizzaiolo-nocoes-de-cozinha) | JRH Consultoria e Treinamento | Efetiva (CLT) | R$ 1670.00 Horários 16:00 às 00:00 Modelo de trabalho Presencial Compartilhe Compartilhe com um(a) amigo(a) |  |
-| [Senac Ceará - Detalhes da Vaga: AUXILIAR DE COZINHA / CHAPEIRO](#senac-ceara-detalhes-da-vaga-auxiliar-de-cozinha-chapeiro) | JRH Consultoria e Treinamento | Efetiva (CLT) | R$ 1900.00 Horários 17:00 às 01:00 Modelo de trabalho Presencial Compartilhe Compartilhe com um(a) amigo(a) |  |
-| [Senac Ceará - Detalhes da Vaga: ESTAGIÁRIO(A) DE ESTOQUE](#senac-ceara-detalhes-da-vaga-estagiarioa-de-estoque) | JRH Consultoria e Treinamento | Efetiva (CLT) | R$ 800.00 Horários Comercial Modelo de trabalho Presencial Compartilhe Compartilhe com um(a) amigo(a) |  |
-| [Senac Ceará - Detalhes da Vaga: ESTAGIÁRIO(A) DE MARKETING](#senac-ceara-detalhes-da-vaga-estagiarioa-de-marketing) | JRH Consultoria e Treinamento | Efetiva (CLT) | R$ 800.00 Horários Comercial Modelo de trabalho Presencial Compartilhe Compartilhe com um(a) amigo(a) |  |
-| [Senac Ceará - Detalhes da Vaga: ESTAGIÁRIO(A) DE ATENDIMENTO - ÓTICA](#senac-ceara-detalhes-da-vaga-estagiarioa-de-atendimento-otica) | JRH Consultoria e Treinamento | Efetiva (CLT) | R$ 800.00 Horários Comercial Modelo de trabalho Presencial Compartilhe Compartilhe com um(a) amigo(a) |  |
-| [Senac Ceará - Detalhes da Vaga: ESTAGIÁRIO(A) DE LINHA DE PRODUÇÃO - RESTAURANTE](#senac-ceara-detalhes-da-vaga-estagiarioa-de-linha-de-producao-restaurante) | JRH Consultoria e Treinamento | Efetiva (CLT) | R$ 700.00 Horários Comercial Modelo de trabalho Presencial Compartilhe Compartilhe com um(a) amigo(a) |  |
+| [OPERADOR(A) DE CAIXA - LOJA DE CONVENIÊNCIA](#operadora-de-caixa-loja-de-conveniencia) | JRH Consultoria e Treinamento | Efetiva (CLT) | R\$ 1621.00 | 12X36 |
+| [SALGADEIRO(A)](#salgadeiroa) | JRH Consultoria e Treinamento | Efetiva (CLT) | R\$ 1621.00 | Comercial |
+| [CUMIM](#cumim) | JRH Consultoria e Treinamento | Efetiva (CLT) | R\$ 1760.00 | 16:00 às 00:00 |
+| [AUXILIAR DE PIZZAIOLO (NOÇÕES DE COZINHA)](#auxiliar-de-pizzaiolo-nocoes-de-cozinha) | JRH Consultoria e Treinamento | Efetiva (CLT) | R\$ 1670.00 | 16:00 às 00:00 |
+| [AUXILIAR DE COZINHA / CHAPEIRO](#auxiliar-de-cozinha-chapeiro) | JRH Consultoria e Treinamento | Efetiva (CLT) | R\$ 1900.00 | 17:00 às 01:00 |
+| [ESTAGIÁRIO(A) DE ESTOQUE](#estagiarioa-de-estoque) | JRH Consultoria e Treinamento | Efetiva (CLT) | R\$ 800.00 | Comercial |
+| [ESTAGIÁRIO(A) DE MARKETING](#estagiarioa-de-marketing) | JRH Consultoria e Treinamento | Efetiva (CLT) | R\$ 800.00 | Comercial |
+| [ESTAGIÁRIO(A) DE ATENDIMENTO - ÓTICA](#estagiarioa-de-atendimento-otica) | JRH Consultoria e Treinamento | Efetiva (CLT) | R\$ 800.00 | Comercial |
+| [ESTAGIÁRIO(A) DE LINHA DE PRODUÇÃO - RESTAURANTE](#estagiarioa-de-linha-de-producao-restaurante) | JRH Consultoria e Treinamento | Efetiva (CLT) | R\$ 700.00 | Comercial |
 
-## Senac Ceará - Detalhes da Vaga: OPERADOR(A) DE CAIXA - LOJA DE CONVENIÊNCIA
+## OPERADOR(A) DE CAIXA - LOJA DE CONVENIÊNCIA
 
 [Abrir página da vaga](https://carreiras.ce.senac.br/vaga/efetiva/794/operadora-de-caixa-loja-de-conveniencia)
 
 > [!info] Sobral Bairro/Local Sobral/Forquilha, CE
 > **Tipo de contratação:** Efetiva (CLT)
-> **Salário:** R$ 1621.00 Horários 12X36 Modelo de trabalho Presencial Compartilhe Compartilhe com um(a) amigo(a)
+> **Salário:** R\$ 1621.00
+> **Horário:** 12X36
+> **Modalidade:** Presencial
 > **Requisitos:** Ensino médio completo; Experiência com operação de caixa será um diferencial; Conhecimento básico em informática; Atenção, organização e responsabilidade; Boa comunicação e cordialidade no atendimento; Agilidade e facilidade para lidar com movimentações financeiras; Disponibilidade de horário.
 >
 > > [!example]- Atividades e Exigências
@@ -39,18 +41,16 @@ Catálogo consultado em [Carreiras Senac Ceará](https://carreiras.ce.senac.br/v
 >
 > > [!tip]- Benefícios
 > > A combinar; Alimentação no local;
-> > Interessado nesta vaga?
-> > Candidate-se agora e dê o próximo passo na sua carreira!
-> > Faça login e se candidate
-> > Detalhes da Vaga
 
-## Senac Ceará - Detalhes da Vaga: SALGADEIRO(A)
+## SALGADEIRO(A)
 
 [Abrir página da vaga](https://carreiras.ce.senac.br/vaga/efetiva/793/salgadeiroa)
 
 > [!info] Sobral Bairro/Local Sobral, CE
 > **Tipo de contratação:** Efetiva (CLT)
-> **Salário:** R$ 1621.00 Horários Comercial Modelo de trabalho Presencial Compartilhe Compartilhe com um(a) amigo(a)
+> **Salário:** R\$ 1621.00
+> **Horário:** Comercial
+> **Modalidade:** Presencial
 > **Requisitos:** Experiência na produção de salgados será um diferencial; Conhecimento em preparo de massas e recheios; Agilidade, organização e atenção aos detalhes; Comprometimento com a qualidade e padronização dos produtos; Responsabilidade e capacidade de trabalhar em equipe; Disponibilidade de horário.
 >
 > > [!example]- Atividades e Exigências
@@ -58,18 +58,16 @@ Catálogo consultado em [Carreiras Senac Ceará](https://carreiras.ce.senac.br/v
 >
 > > [!tip]- Benefícios
 > > A combinar;
-> > Interessado nesta vaga?
-> > Candidate-se agora e dê o próximo passo na sua carreira!
-> > Faça login e se candidate
-> > Detalhes da Vaga
 
-## Senac Ceará - Detalhes da Vaga: CUMIM
+## CUMIM
 
 [Abrir página da vaga](https://carreiras.ce.senac.br/vaga/efetiva/792/cumim)
 
 > [!info] Sobral Bairro/Local Sobral, CE
 > **Tipo de contratação:** Efetiva (CLT)
-> **Salário:** R$ 1760.00 Horários 16:00 às 00:00 Modelo de trabalho Presencial Compartilhe Compartilhe com um(a) amigo(a)
+> **Salário:** R\$ 1760.00
+> **Horário:** 16:00 às 00:00
+> **Modalidade:** Presencial
 > **Requisitos:** Ensino médio completo ou em andamento; Experiência em restaurantes será um diferencial; Boa comunicação, cordialidade e postura profissional; Agilidade, organização e atenção; Facilidade para trabalhar em equipe; Disponibilidade de horário.
 >
 > > [!example]- Atividades e Exigências
@@ -77,18 +75,16 @@ Catálogo consultado em [Carreiras Senac Ceará](https://carreiras.ce.senac.br/v
 >
 > > [!tip]- Benefícios
 > > A combinar;
-> > Interessado nesta vaga?
-> > Candidate-se agora e dê o próximo passo na sua carreira!
-> > Faça login e se candidate
-> > Detalhes da Vaga
 
-## Senac Ceará - Detalhes da Vaga: AUXILIAR DE PIZZAIOLO (NOÇÕES DE COZINHA)
+## AUXILIAR DE PIZZAIOLO (NOÇÕES DE COZINHA)
 
 [Abrir página da vaga](https://carreiras.ce.senac.br/vaga/efetiva/791/auxiliar-de-pizzaiolo-nocoes-de-cozinha)
 
 > [!info] Sobral Bairro/Local Sobral, CE
 > **Tipo de contratação:** Efetiva (CLT)
-> **Salário:** R$ 1670.00 Horários 16:00 às 00:00 Modelo de trabalho Presencial Compartilhe Compartilhe com um(a) amigo(a)
+> **Salário:** R\$ 1670.00
+> **Horário:** 16:00 às 00:00
+> **Modalidade:** Presencial
 > **Requisitos:** Possuir noções básicas de cozinha e manipulação de alimentos; Experiência em pizzarias, restaurantes ou cozinhas será um diferencial; Agilidade, organização e disposição para aprender; Comprometimento e responsabilidade; Facilidade para trabalhar em equipe; Disponibilidade de horário.
 >
 > > [!example]- Atividades e Exigências
@@ -96,18 +92,16 @@ Catálogo consultado em [Carreiras Senac Ceará](https://carreiras.ce.senac.br/v
 >
 > > [!tip]- Benefícios
 > > A combinar;
-> > Interessado nesta vaga?
-> > Candidate-se agora e dê o próximo passo na sua carreira!
-> > Faça login e se candidate
-> > Detalhes da Vaga
 
-## Senac Ceará - Detalhes da Vaga: AUXILIAR DE COZINHA / CHAPEIRO
+## AUXILIAR DE COZINHA / CHAPEIRO
 
 [Abrir página da vaga](https://carreiras.ce.senac.br/vaga/efetiva/790/auxiliar-de-cozinha-chapeiro)
 
 > [!info] Sobral Bairro/Local Sobral, CE
 > **Tipo de contratação:** Efetiva (CLT)
-> **Salário:** R$ 1900.00 Horários 17:00 às 01:00 Modelo de trabalho Presencial Compartilhe Compartilhe com um(a) amigo(a)
+> **Salário:** R\$ 1900.00
+> **Horário:** 17:00 às 01:00
+> **Modalidade:** Presencial
 > **Requisitos:** Experiência na área de cozinha será um diferencial; Noções de preparo de alimentos e operação de chapa; Agilidade, organização e atenção aos detalhes; Comprometimento, responsabilidade e facilidade para trabalhar em equipe; Disponibilidade de horário.
 >
 > > [!example]- Atividades e Exigências
@@ -115,55 +109,59 @@ Catálogo consultado em [Carreiras Senac Ceará](https://carreiras.ce.senac.br/v
 >
 > > [!tip]- Benefícios
 > > A combinar;
-> > Interessado nesta vaga?
-> > Candidate-se agora e dê o próximo passo na sua carreira!
-> > Faça login e se candidate
-> > Detalhes da Vaga
 
-## Senac Ceará - Detalhes da Vaga: ESTAGIÁRIO(A) DE ESTOQUE
+## ESTAGIÁRIO(A) DE ESTOQUE
 
 [Abrir página da vaga](https://carreiras.ce.senac.br/vaga/jovem-aprendiz/789/estagiarioa-de-estoque)
 
 > [!info] Sobral Bairro/Local Sobral, CE
 > **Tipo de contratação:** Efetiva (CLT)
-> **Salário:** R$ 800.00 Horários Comercial Modelo de trabalho Presencial Compartilhe Compartilhe com um(a) amigo(a)
-> **Requisitos:** Estar regularmente matriculado(a) em curso técnico ou superior relacionado à área; Conhecimento básico em informática será um diferencial; Organização, atenção, responsabilidade e proatividade; Interesse em rotinas de controle de estoque, armazenagem e logística. Cursos relacionados: Administração; Logística; Gestão Comercial; Processos Gerenciais; Engenharia de Produção; Ciências Contábeis; Técnico em Logística; Técnico em Administração. Interessado nesta vaga? Candidate-se agora e dê o próximo passo na sua carreira! Faça login e se candidate Detalhes da Vaga
+> **Salário:** R\$ 800.00
+> **Horário:** Comercial
+> **Modalidade:** Presencial
+> **Requisitos:** Estar regularmente matriculado(a) em curso técnico ou superior relacionado à área; Conhecimento básico em informática será um diferencial; Organização, atenção, responsabilidade e proatividade; Interesse em rotinas de controle de estoque, armazenagem e logística. Cursos relacionados: Administração; Logística; Gestão Comercial; Processos Gerenciais; Engenharia de Produção; Ciências Contábeis; Técnico em Logística; Técnico em Administração.
 >
 > > [!example]- Atividades e Exigências
 > > Auxiliar no recebimento e conferência de mercadorias e produtos; Apoiar na organização, identificação e armazenamento dos itens no estoque; Auxiliar no controle de entrada e saída de mercadorias; Realizar registros e atualizações de informações em planilhas ou sistemas internos; Acompanhar a conferência de quantidades, validade e condições dos produtos; Apoiar na realização de inventários e contagens periódicas; Auxiliar na identificação de necessidades de reposição de produtos; Contribuir para a organização e manutenção do ambiente de estoque.
 
-## Senac Ceará - Detalhes da Vaga: ESTAGIÁRIO(A) DE MARKETING
+## ESTAGIÁRIO(A) DE MARKETING
 
 [Abrir página da vaga](https://carreiras.ce.senac.br/vaga/jovem-aprendiz/788/estagiarioa-de-marketing)
 
 > [!info] Sobral Bairro/Local Sobral/Forquilha, CE
 > **Tipo de contratação:** Efetiva (CLT)
-> **Salário:** R$ 800.00 Horários Comercial Modelo de trabalho Presencial Compartilhe Compartilhe com um(a) amigo(a)
-> **Requisitos:** Estar regularmente matriculado(a) em curso técnico ou superior relacionado à área; Conhecimento básico em redes sociais e ferramentas de criação será um diferencial; Criatividade, boa comunicação e organização; Interesse em comunicação, publicidade, criação de conteúdo e estratégias digitais. Cursos relacionados: Marketing; Publicidade e Propaganda; Comunicação Social; Design Gráfico; Jornalismo; Administração (com formação ou ênfase em Marketing); Produção Multimídia; Design Digital. Interessado nesta vaga? Candidate-se agora e dê o próximo passo na sua carreira! Faça login e se candidate Detalhes da Vaga
+> **Salário:** R\$ 800.00
+> **Horário:** Comercial
+> **Modalidade:** Presencial
+> **Requisitos:** Estar regularmente matriculado(a) em curso técnico ou superior relacionado à área; Conhecimento básico em redes sociais e ferramentas de criação será um diferencial; Criatividade, boa comunicação e organização; Interesse em comunicação, publicidade, criação de conteúdo e estratégias digitais. Cursos relacionados: Marketing; Publicidade e Propaganda; Comunicação Social; Design Gráfico; Jornalismo; Administração (com formação ou ênfase em Marketing); Produção Multimídia; Design Digital.
 >
 > > [!example]- Atividades e Exigências
 > > Descrição das atividades: Auxiliar na criação e desenvolvimento de conteúdos para redes sociais; Apoiar na elaboração de artes, materiais gráficos e peças publicitárias; Auxiliar no planejamento e organização de campanhas de marketing; Realizar pesquisas de mercado e levantamento de informações sobre o público-alvo; Apoiar na produção de conteúdos para divulgação de produtos, serviços e ações comerciais; Acompanhar métricas e resultados das redes sociais; Auxiliar na atualização de canais digitais e organização do calendário de publicações; Dar suporte às estratégias de comunicação e posicionamento da empresa.
 
-## Senac Ceará - Detalhes da Vaga: ESTAGIÁRIO(A) DE ATENDIMENTO - ÓTICA
+## ESTAGIÁRIO(A) DE ATENDIMENTO - ÓTICA
 
 [Abrir página da vaga](https://carreiras.ce.senac.br/vaga/jovem-aprendiz/786/estagiarioa-de-atendimento-otica)
 
 > [!info] Sobral Bairro/Local Sobral, CE
 > **Tipo de contratação:** Efetiva (CLT)
-> **Salário:** R$ 800.00 Horários Comercial Modelo de trabalho Presencial Compartilhe Compartilhe com um(a) amigo(a)
-> **Requisitos:** star regularmente matriculado(a) em curso técnico ou superior em andamento; Boa comunicação e facilidade para lidar com o público; Organização, cordialidade e proatividade; Interesse pelas áreas comercial, atendimento e vendas. Cursos relacionados: Administração; Gestão Comercial; Marketing; Processos Gerenciais; Técnico em Administração; Técnico em Vendas. Interessado nesta vaga? Candidate-se agora e dê o próximo passo na sua carreira! Faça login e se candidate Detalhes da Vaga
+> **Salário:** R\$ 800.00
+> **Horário:** Comercial
+> **Modalidade:** Presencial
+> **Requisitos:** star regularmente matriculado(a) em curso técnico ou superior em andamento; Boa comunicação e facilidade para lidar com o público; Organização, cordialidade e proatividade; Interesse pelas áreas comercial, atendimento e vendas. Cursos relacionados: Administração; Gestão Comercial; Marketing; Processos Gerenciais; Técnico em Administração; Técnico em Vendas.
 >
 > > [!example]- Atividades e Exigências
 > > Auxiliar no atendimento e recepção dos clientes; Apoiar na apresentação de armações, lentes e acessórios ópticos; Auxiliar na organização e exposição dos produtos; Acompanhar o processo de vendas e atendimento ao cliente; Dar suporte na organização de vitrines e reposição de mercadorias; Auxiliar no cadastro de clientes e atualização de informações; Acompanhar as rotinas comerciais e administrativas da ótica; Contribuir para a qualidade do atendimento e experiência dos clientes.
 
-## Senac Ceará - Detalhes da Vaga: ESTAGIÁRIO(A) DE LINHA DE PRODUÇÃO - RESTAURANTE
+## ESTAGIÁRIO(A) DE LINHA DE PRODUÇÃO - RESTAURANTE
 
 [Abrir página da vaga](https://carreiras.ce.senac.br/vaga/jovem-aprendiz/785/estagiarioa-de-linha-de-producao-restaurante)
 
 > [!info] Sobral Bairro/Local Sobral, CE
 > **Tipo de contratação:** Efetiva (CLT)
-> **Salário:** R$ 700.00 Horários Comercial Modelo de trabalho Presencial Compartilhe Compartilhe com um(a) amigo(a)
-> **Requisitos:** Estar regularmente matriculado(a) em curso técnico ou superior relacionado à área; Disponibilidade para cumprir a carga horária de estágio; Organização, agilidade, responsabilidade e disposição para aprender; Interesse pela área de gastronomia, alimentação e processos de produção. Cursos relacionados: Gastronomia; Nutrição; Técnico em Alimentos; Tecnologia em Alimentos; Engenharia de Alimentos. Interessado nesta vaga? Candidate-se agora e dê o próximo passo na sua carreira! Faça login e se candidate Detalhes da Vaga
+> **Salário:** R\$ 700.00
+> **Horário:** Comercial
+> **Modalidade:** Presencial
+> **Requisitos:** Estar regularmente matriculado(a) em curso técnico ou superior relacionado à área; Disponibilidade para cumprir a carga horária de estágio; Organização, agilidade, responsabilidade e disposição para aprender; Interesse pela área de gastronomia, alimentação e processos de produção. Cursos relacionados: Gastronomia; Nutrição; Técnico em Alimentos; Tecnologia em Alimentos; Engenharia de Alimentos.
 >
 > > [!example]- Atividades e Exigências
 > > Auxiliar no pré-preparo e preparo de alimentos, conforme orientações da equipe responsável; Acompanhar as etapas de produção e montagem dos pratos; Apoiar na organização e reposição dos insumos utilizados na cozinha; Auxiliar no controle de validade, armazenamento e conservação dos alimentos; Acompanhar os procedimentos de higiene, manipulação e segurança alimentar; Contribuir para a organização do ambiente e dos utensílios de trabalho; Dar suporte à equipe no cumprimento dos padrões de qualidade e produção do restaurante.

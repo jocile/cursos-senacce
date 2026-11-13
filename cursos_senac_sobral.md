@@ -3,18 +3,18 @@ tags:
   - "senac"
   - "cursos"
 unidade: "Senac Sobral"
-coletado_em: "2026-11-12 16:32"
+coletado_em: "2026-11-13 15:20"
 ---
 
 # Cursos do Senac Sobral
 
 Catálogo consultado em [Senac Ceará](https://cursos.ce.senac.br/unidade/senac-sobral/).
 
-**Coletado em:** 2026-11-12 16:32
+**Coletado em:** 2026-11-13 15:20
 
 | Curso | Início | Fim | Dias | Horário | Carga horária | Preço (R$) | Idade mín. |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| [ALFAIATARIA FEMININA (MODELAGEM TRIDIMENSIONAL E COSTURA) - SOBRAL - 2027.12.5](https://cursos.ce.senac.br/produto/alfaiataria-feminina-modelagem-tridimensional-e-costura-sobral-2027-12-5/) | 2027-01-18 | 2027-02-16 | SEG TER QUA QUI | 18:00 às 22:00 | 60h | 420.00 | 18 |
+| [ALFAIATARIA FEMININA (MODELAGEM TRIDIMENSIONAL E COSTURA) - SOBRAL - 2027.12.5](https://cursos.ce.senac.br/produto/alfaiataria-feminina-modelagem-tridimensional-e-costura-sobral-2027-12-5/) | 2027-01-18 | 2027-02-16 | SEG TER QUA QUI | 18:30 às 21:30 | 60h | 420.00 | 18 |
 | [INFORMÁTICA BÁSICA - SOBRAL - NOITE - 2027.12.4](https://cursos.ce.senac.br/produto/informatica-basica-sobral-noite-2027-12-4/) | 2027-01-11 | 2027-02-22 | SEG QUA SEX | 18:00 às 21:10 | 66h | 185.50 | 13 |
 | [INFORMÁTICA BÁSICA - SOBRAL - TARDE - 2027.12.3](https://cursos.ce.senac.br/produto/informatica-basica-sobral-tarde-2027-12-3/) | 2027-01-11 | 2027-02-02 | SEG TER QUA QUI SEX | 13:30 às 17:00 | 66h | 185.50 | 13 |
 | [CAKE DESIGN - SOBRAL - NOITE - 2027.12.2](https://cursos.ce.senac.br/produto/cake-design-sobral-noite-2027-12-2/) | 2027-01-18 | 2027-01-29 | SEG TER QUA QUI SEX | 18:00 às 21:00 | 40h | 266.00 | 16 |
@@ -28,8 +28,8 @@ Catálogo consultado em [Senac Ceará](https://cursos.ce.senac.br/unidade/senac-
 [Abrir página do curso](https://cursos.ce.senac.br/produto/alfaiataria-feminina-modelagem-tridimensional-e-costura-sobral-2027-12-5/)
 
 > [!info] 18/01/2027 a 16/02/2027 · 60h
-> **Horário:** SEG TER QUA QUI · 18:00 às 22:00
-> **Preço:** ~~R$ 600,00~~ **R$ 420,00** (até 10x de R$ 42,00)
+> **Horário:** SEG TER QUA QUI · 18:30 às 21:30
+> **Preço:** ~~R\$ 600,00~~ **R\$ 420,00** (até 10x de R\$ 42,00)
 > **Requisitos:** Idade mínima: 18 anos, Ensino Fundamental II (6º ao 9º Ano) Incompleto e Requisito/Conhecimento Específico: Curso de Modelagem e Costura ou conhecimentos práticos.
 >
 > > [!abstract]+ Descrição
@@ -39,9 +39,9 @@ Catálogo consultado em [Senac Ceará](https://cursos.ce.senac.br/unidade/senac-
 > > Conteúdos abordam fundamentos da alfaiataria feminina, incluindo história, materiais, ferramentas, geometria, medidas e operações matemáticas aplicadas à modelagem.Incluem técnicas de modelagem tridimensional e plana, tomada de medidas, desenvolvimento de moldes, costura, montagem e acabamentos de peças do vestuário.Também desenvolvem competências profissionais como comunicação, trabalho em equipe, organização, proatividade, responsabilidade, postura profissional e respeito à diversidade.
 >
 > > [!tip]- Formas de pagamento
-> > Cartão de Débito em até 1x de R$ 600,00
-> > Cartão de Crédito em até 12x de R$ 50,00
-> > Depósito Bancário em até 1x de R$ 600,00 (Para essa forma de pagamento entrar em contato pelo número (85) 3270 5400 ou WhatsApp (85) 9 9191 3667.)
+> > Cartão de Débito em até 1x de R\$ 600,00
+> > Cartão de Crédito em até 12x de R\$ 50,00
+> > Depósito Bancário em até 1x de R\$ 600,00 (Para essa forma de pagamento entrar em contato pelo número (85) 3270 5400 ou WhatsApp (85) 9 9191 3667.)
 >
 > > [!warning]- Mais informações
 > > Informamos que este curso só ocorrerá se for atingido o número mínimo de alunos por turma. Caso precise de maiores informações, ligue para (85) 3270 5400 ou envie mensagem para o WhatsApp (85) 9 9191 3667.
@@ -52,7 +52,7 @@ Catálogo consultado em [Senac Ceará](https://cursos.ce.senac.br/unidade/senac-
 
 > [!info] 11/01/2027 a 22/02/2027 · 66h
 > **Horário:** SEG QUA SEX · 18:00 às 21:10
-> **Preço:** ~~R$ 265,00~~ **R$ 185,50** (até 4x de R$ 46,38)
+> **Preço:** ~~R\$ 265,00~~ **R\$ 185,50** (até 4x de R\$ 46,38)
 > **Requisitos:** Idade mínima: 13 anos e Ensino Fundamental I (1º ao 5º ano) Incompleto.
 >
 > > [!abstract]+ Descrição
@@ -62,9 +62,9 @@ Catálogo consultado em [Senac Ceará](https://cursos.ce.senac.br/unidade/senac-
 > > Comunicar-se com clareza e objetividade. Flexibilidade nas diversas situações de trabalho. Fundamentos de internet, conceitos básicos, navegação na internet explorer, serviços de pesquisa e download. Correio eletrônico (e-mail), criação de conta, envio e recebimento, respondendo, enviando com anexo. Gerenciador de apresentação power point. Conhecendo o ambiente, os elementos e as ferramentas do gerenciador, criando slides com auto-layouts. Modos de classificação e exibição de slides, trabalhando com marcadores.
 >
 > > [!tip]- Formas de pagamento
-> > Cartão de Débito em até 1x de R$ 265,00
-> > Cartão de Crédito em até 6x de R$ 44,17
-> > Depósito Bancário em até 1x de R$ 265,00 (Para essa forma de pagamento entrar em contato pelo número (85) 3270 5400 ou WhatsApp (85) 9 9191 3667.)
+> > Cartão de Débito em até 1x de R\$ 265,00
+> > Cartão de Crédito em até 6x de R\$ 44,17
+> > Depósito Bancário em até 1x de R\$ 265,00 (Para essa forma de pagamento entrar em contato pelo número (85) 3270 5400 ou WhatsApp (85) 9 9191 3667.)
 >
 > > [!warning]- Mais informações
 > > Informamos que este curso só ocorrerá se for atingido o número mínimo de alunos por turma. Caso precise de maiores informações, ligue para (85) 3270 5400 ou envie mensagem para o WhatsApp (85) 9 9191 3667.
@@ -75,7 +75,7 @@ Catálogo consultado em [Senac Ceará](https://cursos.ce.senac.br/unidade/senac-
 
 > [!info] 11/01/2027 a 02/02/2027 · 66h
 > **Horário:** SEG TER QUA QUI SEX · 13:30 às 17:00
-> **Preço:** ~~R$ 265,00~~ **R$ 185,50** (até 4x de R$ 46,38)
+> **Preço:** ~~R\$ 265,00~~ **R\$ 185,50** (até 4x de R\$ 46,38)
 > **Requisitos:** Idade mínima: 13 anos e Ensino Fundamental I (1º ao 5º ano) Incompleto.
 >
 > > [!abstract]+ Descrição
@@ -85,9 +85,9 @@ Catálogo consultado em [Senac Ceará](https://cursos.ce.senac.br/unidade/senac-
 > > Comunicar-se com clareza e objetividade. Flexibilidade nas diversas situações de trabalho. Fundamentos de internet, conceitos básicos, navegação na internet explorer, serviços de pesquisa e download. Correio eletrônico (e-mail), criação de conta, envio e recebimento, respondendo, enviando com anexo. Gerenciador de apresentação power point. Conhecendo o ambiente, os elementos e as ferramentas do gerenciador, criando slides com auto-layouts. Modos de classificação e exibição de slides, trabalhando com marcadores.
 >
 > > [!tip]- Formas de pagamento
-> > Cartão de Débito em até 1x de R$ 265,00
-> > Cartão de Crédito em até 6x de R$ 44,17
-> > Depósito Bancário em até 1x de R$ 265,00 (Para essa forma de pagamento entrar em contato pelo número (85) 3270 5400 ou WhatsApp (85) 9 9191 3667.)
+> > Cartão de Débito em até 1x de R\$ 265,00
+> > Cartão de Crédito em até 6x de R\$ 44,17
+> > Depósito Bancário em até 1x de R\$ 265,00 (Para essa forma de pagamento entrar em contato pelo número (85) 3270 5400 ou WhatsApp (85) 9 9191 3667.)
 >
 > > [!warning]- Mais informações
 > > Informamos que este curso só ocorrerá se for atingido o número mínimo de alunos por turma. Caso precise de maiores informações, ligue para (85) 3270 5400 ou envie mensagem para o WhatsApp (85) 9 9191 3667.
@@ -98,7 +98,7 @@ Catálogo consultado em [Senac Ceará](https://cursos.ce.senac.br/unidade/senac-
 
 > [!info] 18/01/2027 a 29/01/2027 · 40h
 > **Horário:** SEG TER QUA QUI SEX · 18:00 às 21:00
-> **Preço:** ~~R$ 380,00~~ **R$ 266,00** (até 6x de R$ 44,33)
+> **Preço:** ~~R\$ 380,00~~ **R\$ 266,00** (até 6x de R\$ 44,33)
 > **Requisitos:** Idade mínima: 16 anos, Ensino Fundamental Completo e requisito/conhecimento específico: experiência na elaboração de bolos.
 >
 > > [!abstract]+ Descrição
@@ -108,9 +108,9 @@ Catálogo consultado em [Senac Ceará](https://cursos.ce.senac.br/unidade/senac-
 > > Aplicar técnicas de cake design. bolo base para cake design, tipos de massas (amanteigada e pão de ló), recheios (trufados e brigadeiros), caldas (frias, sucos, leite e para cobertura de bolo). Combinar sabores e estética. Criatividade no design de bolos. Documentos orientadores, ficha técnica de produção, ordem de serviço entre outros. Elaborar proposta de cake design. Etapas de estruturação de bolos, empilhamento, prensagem, blindagem (com chocolates, buttercream, entre outros), nivelamento de bolo, cobertura. Flexibilidade nas diversas situações de trabalho. Insumo do cake design, tipos e características. Interpretar ficha técnica de produção. Legislação e procedimentos, boas práticas para serviço de alimentação quanto a higiene pessoal, ambiental, equipamentos, móveis, utensílios de trabalho e insumos (recebimento, armazenamento, pré-preparo, preparo, resfriamento, envase, embalamento, distribuição e transporte). Riscos de contaminação cruzada (uso de utensílios e equipamentos contaminados), multiplicação de micro-organismos e descarte de resíduos. Mise en place, conceito e aplicabilidade. Otimização de tempo, recursos, produtos e ingredientes. Princípios Sustentabilidade na gestão de recursos, produtos e insumos. Responsabilidade com a segurança dos alimentos e com o local de trabalho. Técnicas de decoração de coberturas para bolos, glacê real, glacê fluído, pasta americana, pastilhagem, massa elástica. Técnicas de finalização e apresentação de produções de cake design, drapeados, laços texturizados, rendas comestíveis, plissados, babados e passa fita, acabamento metalizado e perolado, pintura com o uso do aerógrafo. Técnicas de montagem de bolos falsos com a utilização de isopor. Utilizar as boas práticas para serviços de alimentação. Zelo pela qualidade das preparações culinárias.
 >
 > > [!tip]- Formas de pagamento
-> > Cartão de Débito em até 1x de R$ R$ 380,00
-> > Cartão de Crédito em até 9x de R$ 42,22
-> > Depósito Bancário em até 1x de R$ 380,00 (Para essa forma de pagamento entrar em contato pelo número (85) 3270- 5400 ou WhatsApp (85) 991913667.)
+> > Cartão de Débito em até 1x de R\$ R\$ 380,00
+> > Cartão de Crédito em até 9x de R\$ 42,22
+> > Depósito Bancário em até 1x de R\$ 380,00 (Para essa forma de pagamento entrar em contato pelo número (85) 3270- 5400 ou WhatsApp (85) 991913667.)
 >
 > > [!warning]- Mais informações
 > > Informamos que este curso só ocorrerá se for atingido o número mínimo de alunos por turma. Caso precise de maiores informações, ligue para (85) 3270 5400 ou envie mensagem para o WhatsApp 85 9 9191 3667.
@@ -121,7 +121,7 @@ Catálogo consultado em [Senac Ceará](https://cursos.ce.senac.br/unidade/senac-
 
 > [!info] 18/01/2027 a 24/03/2028 · 1200h | 3 módulos
 > **Horário:** SEG TER QUA QUI SEX · 18:30 às 21:30
-> **Preço:** ~~R$ 1.991,52~~ **R$ 995,76** (até 12x de R$ 82,98)
+> **Preço:** ~~R\$ 1.991,52~~ **R\$ 995,76** (até 12x de R\$ 82,98)
 > **Requisitos:** Idade mínima: 16 anos e cursando, no mínimo, o 2º ano do Ensino Médio.
 >
 > > [!abstract]+ Descrição
@@ -141,12 +141,12 @@ Catálogo consultado em [Senac Ceará](https://cursos.ce.senac.br/unidade/senac-
 >
 > > [!tip]- Formas de pagamento
 > > ESTE CURSO É DIVIDIDO EM 3 MÓDULOS
-> > Módulo 1 – R$ 1.991,52 – Pagamento no site
-> > Cartão de Débito em até 1x de R$ 1.991,52
-> > Cartão de Crédito em até 12x de R$ 165,96
-> > Depósito Bancário em até 1x de R$ 1.991,52 (Para esta forma de pagamento, entre em contato pelo número (85) 3270 5400 ou WhatsApp (85) 9 9191 3667.)
-> > Módulo 2 – R$ 1.567,40 – Pagamento no ato da rematrícula (Para mais informações sobre as formas de pagamento, entre em contato pelo número (85) 3270 5400 ou WhatsApp (85) 9 9191 3667.)
-> > Módulo 3 – R$ 1.981,08 – Pagamento no ato da rematrícula (Para mais informações sobre as formas de pagamento, entre em contato pelo número (85) 3270 5400 ou WhatsApp (85) 9 9191 3667.)
+> > Módulo 1 – R\$ 1.991,52 – Pagamento no site
+> > Cartão de Débito em até 1x de R\$ 1.991,52
+> > Cartão de Crédito em até 12x de R\$ 165,96
+> > Depósito Bancário em até 1x de R\$ 1.991,52 (Para esta forma de pagamento, entre em contato pelo número (85) 3270 5400 ou WhatsApp (85) 9 9191 3667.)
+> > Módulo 2 – R\$ 1.567,40 – Pagamento no ato da rematrícula (Para mais informações sobre as formas de pagamento, entre em contato pelo número (85) 3270 5400 ou WhatsApp (85) 9 9191 3667.)
+> > Módulo 3 – R\$ 1.981,08 – Pagamento no ato da rematrícula (Para mais informações sobre as formas de pagamento, entre em contato pelo número (85) 3270 5400 ou WhatsApp (85) 9 9191 3667.)
 >
 > > [!warning]- Mais informações
 > > Informamos que este curso só ocorrerá se for atingido o número mínimo de alunos por turma. Caso precise de maiores informações, ligue para (85) 3270 5400 ou envie mensagem para o WhatsApp (85) 9 9191 3667.
@@ -157,7 +157,7 @@ Catálogo consultado em [Senac Ceará](https://cursos.ce.senac.br/unidade/senac-
 
 > [!info] 30/11/2026 a 16/12/2026 · 32h
 > **Horário:** SEG QUA SEX · 18:30 às 21:30
-> **Preço:** ~~R$ 280,00~~ **R$ 196,00** (até 4x de R$ 49,00)
+> **Preço:** ~~R\$ 280,00~~ **R\$ 196,00** (até 4x de R\$ 49,00)
 > **Requisitos:** Idade mínima: 14 anos, Ensino Fundamental II (6º ao 9º Ano) Incompleto e Requisito/Conhecimento Específico: Básico em Power BI.
 >
 > > [!abstract]+ Descrição
@@ -179,9 +179,9 @@ Catálogo consultado em [Senac Ceará](https://cursos.ce.senac.br/unidade/senac-
 > > - Revisão dos Conceitos de Modelagem
 >
 > > [!tip]- Formas de pagamento
-> > Cartão de Débito em até 1x de R$ 280,00
-> > Cartão de Crédito em até 7x de R$ 40,00
-> > Depósito Bancário em até 1x de R$ 280,00 (Para essa forma de pagamento entrar em contato pelo número (85) 3270- 5400 ou WhatsApp (85) 991913667.)
+> > Cartão de Débito em até 1x de R\$ 280,00
+> > Cartão de Crédito em até 7x de R\$ 40,00
+> > Depósito Bancário em até 1x de R\$ 280,00 (Para essa forma de pagamento entrar em contato pelo número (85) 3270- 5400 ou WhatsApp (85) 991913667.)
 >
 > > [!warning]- Mais informações
 > > Informamos que este curso só ocorrerá se for atingido o número mínimo de alunos por turma. Caso precise de maiores informações, ligue para (85) 3270 5400 ou envie mensagem para o WhatsApp (85) 99191 3667.
@@ -192,7 +192,7 @@ Catálogo consultado em [Senac Ceará](https://cursos.ce.senac.br/unidade/senac-
 
 > [!info] 16/11/2026 a 07/12/2026 · 60h
 > **Horário:** SEG TER QUA QUI SEX · 18:30 às 21:30
-> **Preço:** ~~R$ 456,00~~ **R$ 319,20** (até 7x de R$ 45,60)
+> **Preço:** ~~R\$ 456,00~~ **R\$ 319,20** (até 7x de R\$ 45,60)
 > **Requisitos:** Idade mínima: 18 anos e Ensino Médio Completo.
 >
 > > [!abstract]+ Descrição
@@ -208,9 +208,9 @@ Catálogo consultado em [Senac Ceará](https://cursos.ce.senac.br/unidade/senac-
 > > - Treinamento e Desenvolvimento de Equipes: Levantamento de necessidades de treinamento (LNT); Diagnóstico, plano de ação, execução e avaliação
 >
 > > [!tip]- Formas de pagamento
-> > Cartão de Débito em até 1x de R$ 456,00
-> > Cartão de Crédito em até 10x de R$ 45,60
-> > Depósito Bancário em até 1x de R$ 456,00 (Para essa forma de pagamento entrar em contato pelo número (85) 3270 5400 ou WhatsApp (85) 9 9191 3667.)
+> > Cartão de Débito em até 1x de R\$ 456,00
+> > Cartão de Crédito em até 10x de R\$ 45,60
+> > Depósito Bancário em até 1x de R\$ 456,00 (Para essa forma de pagamento entrar em contato pelo número (85) 3270 5400 ou WhatsApp (85) 9 9191 3667.)
 >
 > > [!warning]- Mais informações
 > > Informamos que este curso só ocorrerá se for atingido o número mínimo de alunos por turma. Caso precise de maiores informações, ligue para (85) 3270 5400 ou envie mensagem para o WhatsApp (85) 9 9191 3667.
@@ -221,7 +221,7 @@ Catálogo consultado em [Senac Ceará](https://cursos.ce.senac.br/unidade/senac-
 
 > [!info] 16/11/2026 a 23/11/2026 · 20h
 > **Horário:** SEG TER QUA QUI SEX · 18:30 às 21:30
-> **Preço:** ~~R$ 243,00~~ **R$ 170,10** (até 4x de R$ 42,53)
+> **Preço:** ~~R\$ 243,00~~ **R\$ 170,10** (até 4x de R\$ 42,53)
 > **Requisitos:** Idade mínima: 16 anos e Ensino Fundamental II (6º ao 9º Ano) Incompleto.
 >
 > > [!abstract]+ Descrição
@@ -235,9 +235,9 @@ Catálogo consultado em [Senac Ceará](https://cursos.ce.senac.br/unidade/senac-
 > > - Gestão e Qualidade: Formação de preço e controle de custos. Qualidade e segurança alimentar.
 >
 > > [!tip]- Formas de pagamento
-> > Cartão de Débito em até 1x de R$ 243,00
-> > Cartão de Crédito em até 6x de R$ 40,50
-> > Depósito Bancário em até 1x de R$ 243,00 (Para essa forma de pagamento entrar em contato pelo número (85) 3270 5400 ou WhatsApp (85) 9 9191 3667.)
+> > Cartão de Débito em até 1x de R\$ 243,00
+> > Cartão de Crédito em até 6x de R\$ 40,50
+> > Depósito Bancário em até 1x de R\$ 243,00 (Para essa forma de pagamento entrar em contato pelo número (85) 3270 5400 ou WhatsApp (85) 9 9191 3667.)
 >
 > > [!warning]- Mais informações
 > > Informamos que este curso só ocorrerá se for atingido o número mínimo de alunos por turma. Caso precise de maiores informações, ligue para (85) 3270 5400 ou envie mensagem para o WhatsApp 85 9 9191 3667.
